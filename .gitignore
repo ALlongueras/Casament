@@ -1,0 +1,6 @@
+Casament/App_Data/*
+Casament/bin/*
+Casament/umbraco/*
+Casament/umbraco_client/*
+Casament/obj/*
+packages/*
