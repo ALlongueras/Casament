@@ -215,21 +215,234 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\SignInFormController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SignInModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="bin\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
+    <Content Include="bin\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
+    <Content Include="bin\amd64\sqlceca40.dll" />
+    <Content Include="bin\amd64\sqlcecompact40.dll" />
+    <Content Include="bin\amd64\sqlceer40EN.dll" />
+    <Content Include="bin\amd64\sqlceme40.dll" />
+    <Content Include="bin\amd64\sqlceqp40.dll" />
+    <Content Include="bin\amd64\sqlcese40.dll" />
+    <Content Include="bin\AutoMapper.dll" />
+    <Content Include="bin\AutoMapper.Net4.dll" />
+    <Content Include="bin\AutoMapper.xml" />
+    <Content Include="bin\businesslogic.dll" />
+    <Content Include="bin\businesslogic.xml" />
+    <Content Include="bin\Casament.dll" />
+    <Content Include="bin\Casament.pdb" />
+    <Content Include="bin\ClientDependency.Core.dll" />
+    <Content Include="bin\ClientDependency.Core.Mvc.dll" />
+    <Content Include="bin\ClientDependency.Core.Mvc.pdb" />
+    <Content Include="bin\ClientDependency.Core.pdb" />
+    <Content Include="bin\cms.dll" />
+    <Content Include="bin\cms.xml" />
+    <Content Include="bin\controls.dll" />
+    <Content Include="bin\controls.xml" />
+    <Content Include="bin\CookComputing.XmlRpcV2.dll" />
+    <Content Include="bin\Examine.dll" />
+    <Content Include="bin\Examine.pdb" />
+    <Content Include="bin\HtmlAgilityPack.dll" />
+    <Content Include="bin\HtmlAgilityPack.pdb" />
+    <Content Include="bin\HtmlAgilityPack.xml" />
+    <Content Include="bin\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="bin\ImageProcessor.dll" />
+    <Content Include="bin\ImageProcessor.Web.dll" />
+    <Content Include="bin\interfaces.dll" />
+    <Content Include="bin\interfaces.xml" />
+    <Content Include="bin\log4net.dll" />
+    <Content Include="bin\Lucene.Net.dll" />
+    <Content Include="bin\Lucene.Net.xml" />
+    <Content Include="bin\Microsoft.ApplicationBlocks.Data.dll" />
+    <Content Include="bin\Microsoft.Web.Helpers.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Microsoft.Web.Mvc.FixedDisplayModes.dll" />
+    <Content Include="bin\MiniProfiler.dll" />
+    <Content Include="bin\MiniProfiler.pdb" />
+    <Content Include="bin\MiniProfiler.xml" />
+    <Content Include="bin\MySql.Data.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="bin\SQLCE4Umbraco.dll" />
+    <Content Include="bin\System.Data.SqlServerCe.dll" />
+    <Content Include="bin\System.Data.SqlServerCe.Entity.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.xml" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Helpers.xml" />
+    <Content Include="bin\System.Web.Http.dll" />
+    <Content Include="bin\System.Web.Http.WebHost.dll" />
+    <Content Include="bin\System.Web.Http.WebHost.xml" />
+    <Content Include="bin\System.Web.Http.xml" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.xml" />
+    <Content Include="bin\TidyNet.dll" />
+    <Content Include="bin\Umbraco.Core.dll" />
+    <Content Include="bin\Umbraco.Core.xml" />
+    <Content Include="bin\umbraco.DataLayer.dll" />
+    <Content Include="bin\umbraco.DataLayer.xml" />
+    <Content Include="bin\umbraco.dll" />
+    <Content Include="bin\umbraco.editorControls.dll" />
+    <Content Include="bin\umbraco.editorControls.xml" />
+    <Content Include="bin\umbraco.MacroEngines.dll" />
+    <Content Include="bin\umbraco.MacroEngines.xml" />
+    <Content Include="bin\umbraco.providers.dll" />
+    <Content Include="bin\umbraco.providers.xml" />
+    <Content Include="bin\Umbraco.Web.UI.dll" />
+    <Content Include="bin\umbraco.xml" />
+    <Content Include="bin\umbraco.XmlSerializers.dll" />
+    <Content Include="bin\UmbracoExamine.dll" />
+    <Content Include="bin\UrlRewritingNet.UrlRewriter.dll" />
+    <Content Include="bin\x86\Microsoft.VC90.CRT\msvcr90.dll" />
+    <Content Include="bin\x86\Microsoft.VC90.CRT\README_ENU.txt" />
+    <Content Include="bin\x86\sqlceca40.dll" />
+    <Content Include="bin\x86\sqlcecompact40.dll" />
+    <Content Include="bin\x86\sqlceer40EN.dll" />
+    <Content Include="bin\x86\sqlceme40.dll" />
+    <Content Include="bin\x86\sqlceqp40.dll" />
+    <Content Include="bin\x86\sqlcese40.dll" />
+    <Content Include="css\bootstrap\bootstrap-theme.css" />
+    <Content Include="css\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="css\bootstrap\bootstrap.css" />
+    <Content Include="css\bootstrap\bootstrap.min.css" />
+    <Content Include="css\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="css\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="css\bootstrap\css\bootstrap.css" />
+    <Content Include="css\bootstrap\css\bootstrap.min.css" />
+    <Content Include="css\custom.css" />
     <Content Include="css\dummy.txt" />
+    <Content Include="css\font-awesome\css\font-awesome.css" />
+    <Content Include="css\font-awesome\css\font-awesome.min.css" />
+    <Content Include="css\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="css\fonts\Apache License.txt" />
+    <Content Include="css\fonts\OpenSans-Bold-webfont.svg" />
+    <Content Include="css\fonts\OpenSans-Italic-webfont.svg" />
+    <Content Include="css\fonts\OpenSans-Light-webfont.svg" />
+    <Content Include="css\fonts\OpenSans-Regular-webfont.svg" />
+    <Content Include="css\fonts\OpenSans-Semibold-webfont.svg" />
+    <Content Include="css\fonts\stylesheet.css" />
+    <Content Include="css\styles.css" />
     <Content Include="default.aspx" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\other_images\bg1.jpg" />
+    <Content Include="images\other_images\bg2.jpg" />
+    <Content Include="images\other_images\bg3.jpg" />
+    <Content Include="images\other_images\bg4.jpg" />
+    <Content Include="images\other_images\bg5.jpg" />
+    <Content Include="images\other_images\bg6.jpg" />
+    <Content Include="images\other_images\favicon.png" />
+    <Content Include="images\other_images\gallery-thumb-1.jpg" />
+    <Content Include="images\other_images\gallery-thumb-2.jpg" />
+    <Content Include="images\other_images\gallery-thumb-3.jpg" />
+    <Content Include="images\other_images\gallery-thumb-4.jpg" />
+    <Content Include="images\other_images\gallery-thumb-5.jpg" />
+    <Content Include="images\other_images\gallery-thumb-6.jpg" />
+    <Content Include="images\other_images\logo.png" />
+    <Content Include="images\other_images\project-1.jpg" />
+    <Content Include="images\other_images\project-2.jpg" />
+    <Content Include="images\other_images\project-3.jpg" />
+    <Content Include="images\other_images\project-4.jpg" />
+    <Content Include="images\other_images\project-5.jpg" />
+    <Content Include="images\other_images\project-6.jpg" />
+    <Content Include="images\other_images\project-7.jpg" />
+    <Content Include="images\other_images\project-8.jpg" />
+    <Content Include="images\other_images\top-image1.jpg" />
+    <Content Include="images\other_images\top-image2.jpg" />
+    <Content Include="images\other_images\top-image3.jpg" />
+    <Content Include="images\other_images\transp-image1.png" />
+    <Content Include="images\other_images\transp-image2.png" />
+    <Content Include="images\other_images\transp-image3.png" />
+    <Content Include="images\other_images\transp-image4.png" />
+    <Content Include="images\other_images\transp-image5.png" />
+    <Content Include="images\other_images\transp-image5b.png" />
+    <Content Include="images\other_images\transp-image6.png" />
+    <Content Include="images\other_images\transp-image7.png" />
+    <Content Include="images\theme_images\background-image-overlay.png" />
+    <Content Include="images\theme_images\carousel_arrow_left.png" />
+    <Content Include="images\theme_images\carousel_arrow_right.png" />
+    <Content Include="images\theme_images\loader-form.GIF" />
+    <Content Include="images\theme_images\loader.GIF" />
+    <Content Include="images\theme_images\mobile_section_divider.png" />
+    <Content Include="images\theme_images\more-plus-icon.png" />
+    <Content Include="images\theme_images\social_icons\aim.png" />
+    <Content Include="images\theme_images\social_icons\behance.png" />
+    <Content Include="images\theme_images\social_icons\digg.png" />
+    <Content Include="images\theme_images\social_icons\dribbble.png" />
+    <Content Include="images\theme_images\social_icons\ember.png" />
+    <Content Include="images\theme_images\social_icons\evernote.png" />
+    <Content Include="images\theme_images\social_icons\facebook.png" />
+    <Content Include="images\theme_images\social_icons\flickr.png" />
+    <Content Include="images\theme_images\social_icons\forrst.png" />
+    <Content Include="images\theme_images\social_icons\github.png" />
+    <Content Include="images\theme_images\social_icons\googleplus.png" />
+    <Content Include="images\theme_images\social_icons\last-fm.png" />
+    <Content Include="images\theme_images\social_icons\linkedin.png" />
+    <Content Include="images\theme_images\social_icons\paypal.png" />
+    <Content Include="images\theme_images\social_icons\rss.png" />
+    <Content Include="images\theme_images\social_icons\sharethis.png" />
+    <Content Include="images\theme_images\social_icons\skype.png" />
+    <Content Include="images\theme_images\social_icons\tumblr.png" />
+    <Content Include="images\theme_images\social_icons\twitter.png" />
+    <Content Include="images\theme_images\social_icons\vimeo.png" />
+    <Content Include="images\theme_images\social_icons\wordpress.png" />
+    <Content Include="images\theme_images\social_icons\yahoo.png" />
+    <Content Include="images\theme_images\social_icons\youtube.png" />
+    <Content Include="images\theme_images\social_icons\zerply.png" />
     <Content Include="masterpages\dummy.txt" />
     <Content Include="media\dummy.txt" />
+    <Content Include="scripts\bootstrap\bootstrap.js" />
+    <Content Include="scripts\bootstrap\bootstrap.min.js" />
+    <Content Include="scripts\detectmobilebrowser.js" />
     <Content Include="scripts\dummy.txt" />
+    <Content Include="scripts\functions.js" />
+    <Content Include="scripts\functions.min.js" />
+    <Content Include="scripts\initialise-functions.js" />
+    <Content Include="scripts\jquery-1.11.1.min.js" />
+    <Content Include="scripts\jquery.backstretch.min.js" />
+    <Content Include="scripts\jquery.easing.1.3.js" />
+    <Content Include="scripts\jquery.lazyload.min.js" />
+    <Content Include="scripts\jquery.nicescroll.min.js" />
+    <Content Include="scripts\lightbox\css\lightbox.css" />
+    <Content Include="scripts\lightbox\css\screen.css" />
+    <Content Include="scripts\lightbox\img\close-original.png" />
+    <Content Include="scripts\lightbox\img\close.png" />
+    <Content Include="scripts\lightbox\img\loading.gif" />
+    <Content Include="scripts\lightbox\img\next-original.png" />
+    <Content Include="scripts\lightbox\img\next.png" />
+    <Content Include="scripts\lightbox\img\prev-original.png" />
+    <Content Include="scripts\lightbox\img\prev.png" />
+    <Content Include="scripts\lightbox\index.html" />
+    <Content Include="scripts\lightbox\js\jquery-1.11.0.min.js" />
+    <Content Include="scripts\lightbox\js\lightbox.js" />
+    <Content Include="scripts\lightbox\js\lightbox.min.js" />
+    <Content Include="scripts\owl-carousel\AjaxLoader.gif" />
+    <Content Include="scripts\owl-carousel\grabbing.png" />
+    <Content Include="scripts\owl-carousel\owl.carousel.css" />
+    <Content Include="scripts\owl-carousel\owl.carousel.js" />
+    <Content Include="scripts\owl-carousel\owl.carousel.min.js" />
+    <Content Include="scripts\owl-carousel\owl.theme.css" />
+    <Content Include="scripts\owl-carousel\owl.transitions.css" />
+    <Content Include="scripts\wow\animate.css" />
+    <Content Include="scripts\wow\wow.min.js" />
     <Content Include="usercontrols\dummy.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -238,12 +451,13 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\Partials\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -304,6 +518,88 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="config\404handlers.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MacroPartials\Quiz.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Base.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
+    <Content Include="bin\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\bootstrap\bootstrap-theme.css.map" />
+    <Content Include="css\bootstrap\bootstrap.css.map" />
+    <Content Include="css\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="css\bootstrap\css\bootstrap.css.map" />
+    <Content Include="css\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="css\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="css\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="css\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="css\font-awesome\less\bordered-pulled.less" />
+    <Content Include="css\font-awesome\less\core.less" />
+    <Content Include="css\font-awesome\less\fixed-width.less" />
+    <Content Include="css\font-awesome\less\font-awesome.less" />
+    <Content Include="css\font-awesome\less\icons.less" />
+    <Content Include="css\font-awesome\less\larger.less" />
+    <Content Include="css\font-awesome\less\list.less" />
+    <Content Include="css\font-awesome\less\mixins.less" />
+    <Content Include="css\font-awesome\less\path.less" />
+    <Content Include="css\font-awesome\less\rotated-flipped.less" />
+    <Content Include="css\font-awesome\less\spinning.less" />
+    <Content Include="css\font-awesome\less\stacked.less" />
+    <Content Include="css\font-awesome\less\variables.less" />
+    <Content Include="css\font-awesome\scss\font-awesome.scss" />
+    <Content Include="css\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="css\font-awesome\scss\_core.scss" />
+    <Content Include="css\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="css\font-awesome\scss\_icons.scss" />
+    <Content Include="css\font-awesome\scss\_larger.scss" />
+    <Content Include="css\font-awesome\scss\_list.scss" />
+    <Content Include="css\font-awesome\scss\_mixins.scss" />
+    <Content Include="css\font-awesome\scss\_path.scss" />
+    <Content Include="css\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="css\font-awesome\scss\_spinning.scss" />
+    <Content Include="css\font-awesome\scss\_stacked.scss" />
+    <Content Include="css\font-awesome\scss\_variables.scss" />
+    <Content Include="css\fonts\OpenSans-Bold-webfont.eot" />
+    <Content Include="css\fonts\OpenSans-Bold-webfont.ttf" />
+    <Content Include="css\fonts\OpenSans-Bold-webfont.woff" />
+    <Content Include="css\fonts\OpenSans-Italic-webfont.eot" />
+    <Content Include="css\fonts\OpenSans-Italic-webfont.ttf" />
+    <Content Include="css\fonts\OpenSans-Italic-webfont.woff" />
+    <Content Include="css\fonts\OpenSans-Light-webfont.eot" />
+    <Content Include="css\fonts\OpenSans-Light-webfont.ttf" />
+    <Content Include="css\fonts\OpenSans-Light-webfont.woff" />
+    <Content Include="css\fonts\OpenSans-Regular-webfont.eot" />
+    <Content Include="css\fonts\OpenSans-Regular-webfont.ttf" />
+    <Content Include="css\fonts\OpenSans-Regular-webfont.woff" />
+    <Content Include="css\fonts\OpenSans-Semibold-webfont.eot" />
+    <Content Include="css\fonts\OpenSans-Semibold-webfont.ttf" />
+    <Content Include="css\fonts\OpenSans-Semibold-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="scripts\lightbox\js\jquery-1.11.0.min.map" />
+    <Content Include="scripts\lightbox\js\lightbox.min.map" />
+    <Content Include="scripts\lightbox\README.markdown" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PublicHome.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MacroPartials\HomeRender.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

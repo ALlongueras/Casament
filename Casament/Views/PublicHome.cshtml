@@ -1,0 +1,33 @@
+﻿@*@inherits Umbraco.Web.Mvc.UmbracoTemplatePage*@
+@using Member = umbraco.cms.businesslogic.member.Member
+@model Casament.Models.SignInModel
+@{
+    Layout = null;
+}
+
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        //enviar a la home privada
+        <p>Logged in: @Member.GetCurrentMember().getProperty("nickName").Value</p>
+        <p class="logout">@Html.ActionLink("Log out", "MemberUmbLogout", "SignInForm")</p>
+    }
+    else
+    {
+        using (Html.BeginUmbracoForm("MemberUmbLogin", "SignInForm", null, new {@class = "navbar-form navbar-left"}))
+        {
+            <div class="input-group">
+                <span class="input-group-addon inputsWidth">Usuari</span>
+                @Html.TextBox("Email", Model.Email, new {@class = "form-control", @placeholder = "Usuari"})
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon inputsWidth">Contrasenya</span>
+                @Html.TextBox("Password", Model.Password, new {@class = "form-control", @placeholder = "Contrasenya", @type = "password"})
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-default" />
+            </div>
+        }
+        <p>@TempData["Status"]</p>
+    }
+}

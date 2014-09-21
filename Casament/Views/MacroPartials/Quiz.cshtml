@@ -1,1 +1,21 @@
-﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+﻿@using umbraco.MacroEngines
+@inherits Umbraco.Web.Macros.PartialViewMacroPage
+
+@{
+    string idNode = ViewData.Model.MacroParameters["newModel"].ToString();
+    var node = new DynamicNode(idNode);
+}
+
+<article id="text" class="section-wrapper clearfix" data-custom-background-img="images/other_images/bg1.jpg">
+    <div class="content-wrapper clearfix">
+        <div class="col-sm-10 col-md-9 pull-right">
+
+            <h1 class="section-title">@node.GetPropertyValue("titol")</h1>
+
+            <h3>@Html.Raw(node.GetPropertyValue("contingut"))</h3>
+            <p><a href="" class="btn btn-outline-inverse btn-sm">Començar a jugar</a></p>
+                
+        </div><!-- .col-sm-10 -->
+    </div><!-- .content-wrapper -->
+</article>
+

@@ -1,4 +1,15 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Casament.Models
+@using Umbraco.Core.Logging;
+
 @{
-    Layout = null;
+    Layout = "Base.cshtml";
+}
+@{
+    @Html.Partial("SignInForm", new SignInModel())
+    if (User.Identity.IsAuthenticated)
+    {
+        @Umbraco.RenderMacro("HomeRender")
+
+    }
 }
