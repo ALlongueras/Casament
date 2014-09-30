@@ -1,0 +1,16 @@
+﻿/*.buttonSelector {
+    float: left;
+    margin-left: 10px;
+}*/
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+#buttonsSelector {
+    text-align: right;
+}
+
+#buttonsSelector button {
+    float: right;
+}

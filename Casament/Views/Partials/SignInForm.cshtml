@@ -6,13 +6,7 @@
 }
 
 @{
-    if (User.Identity.IsAuthenticated)
-    {
-        //enviar a la home privada
-        <p>Logged in: @Member.GetCurrentMember().getProperty("nickName").Value</p>
-        <p class="logout">@Html.ActionLink("Log out", "MemberUmbLogout", "SignInForm")</p>
-    }
-    else
+    if (!User.Identity.IsAuthenticated)
     {
         using (Html.BeginUmbracoForm("MemberUmbLogin", "SignInForm", null, new {@class = "navbar-form navbar-left"}))
         {

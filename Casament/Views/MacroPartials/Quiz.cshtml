@@ -12,10 +12,38 @@
 
             <h1 class="section-title">@node.GetPropertyValue("titol")</h1>
 
-            <h3>@Html.Raw(node.GetPropertyValue("contingut"))</h3>
-            <p><a href="" class="btn btn-outline-inverse btn-sm">Començar a jugar</a></p>
-                
-        </div><!-- .col-sm-10 -->
-    </div><!-- .content-wrapper -->
+            <h3 class="questionContent">@Html.Raw(node.GetPropertyValue("contingut"))</h3>
+            <div id="buttonsSelector" class="hidden">
+                <div class="input-group" data-type="answer1">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default col-sm-2" type="button">Resposta 1</button>
+                    </span>
+                    @*<label class="form-control">This is the first answer</label>*@
+                </div>
+                <div class="input-group" data-type="answer2">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default col-sm-2" type="button">Resposta 2</button>
+                    </span>
+                    @*<label class="form-control">This is the first answer</label>*@
+                </div>
+                <div class="input-group" data-type="answer3">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default col-sm-2" type="button">Resposta 3</button>
+                    </span>
+                    @*<label class="form-control">This is the first answer</label>*@
+                </div>
+                <div class="input-group" data-type="answer4">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default col-sm-2" type="button">Resposta 4</button>
+                    </span>
+                    @*<label class="form-control">This is the first answer</label>*@
+                </div>
+            </div>
+            <p data-type="button" class="buttonSelector"><a href="#" class="btn btn-outline-inverse btn-sm startQuiz">Començar a jugar</a></p>
+
+        </div>
+        <!-- .col-sm-10 -->
+    </div>
+    <!-- .content-wrapper -->
 </article>
 

@@ -215,10 +215,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\QuizController.cs" />
     <Compile Include="Controllers\SignInFormController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\QuestionAnswerModel.cs" />
+    <Compile Include="Models\QuestionModel.cs" />
     <Compile Include="Models\SignInModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -319,6 +322,7 @@
     <Content Include="bin\x86\sqlceme40.dll" />
     <Content Include="bin\x86\sqlceqp40.dll" />
     <Content Include="bin\x86\sqlcese40.dll" />
+    <Content Include="css\bootstrapWrapperCustom.css" />
     <Content Include="css\bootstrap\bootstrap-theme.css" />
     <Content Include="css\bootstrap\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap\bootstrap.css" />
@@ -339,6 +343,8 @@
     <Content Include="css\fonts\OpenSans-Regular-webfont.svg" />
     <Content Include="css\fonts\OpenSans-Semibold-webfont.svg" />
     <Content Include="css\fonts\stylesheet.css" />
+    <Content Include="css\homeCustom.css" />
+    <Content Include="css\quiz.css" />
     <Content Include="css\styles.css" />
     <Content Include="default.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -441,6 +447,7 @@
     <Content Include="scripts\owl-carousel\owl.carousel.min.js" />
     <Content Include="scripts\owl-carousel\owl.theme.css" />
     <Content Include="scripts\owl-carousel\owl.transitions.css" />
+    <Content Include="scripts\quiz\pregunta.js" />
     <Content Include="scripts\wow\animate.css" />
     <Content Include="scripts\wow\wow.min.js" />
     <Content Include="usercontrols\dummy.txt" />
@@ -457,7 +464,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Partials\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -600,6 +606,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\MacroPartials\HomeRender.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\SignInForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\SideBar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MacroPartials\Pregunta.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
