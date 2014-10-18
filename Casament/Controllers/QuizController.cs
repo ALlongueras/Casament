@@ -21,7 +21,7 @@ namespace Casament.Controllers
         {
             var node = GetQuestionFromRandomSelection(nodeId);
             var questionAnswerModel = new QuestionAnswerModel();
-            if (node==null)
+            if (node == null)
             {
                 questionAnswerModel.State = "false";
                 questionAnswerModel.Result = new QuestionModel();
@@ -32,23 +32,23 @@ namespace Casament.Controllers
                 questionAnswerModel.Result = new QuestionModel
                 {
                     Title = node.Name,
-                    Answer = node.GetPropertyValue("resposta"),
-                    Question = node.GetPropertyValue("pregunta"),
-                    Answer1 = node.GetPropertyValue("resposta1"),
-                    Answer2 = node.GetPropertyValue("resposta2"),
-                    Answer3 = node.GetPropertyValue("resposta3"),
-                    Answer4 = node.GetPropertyValue("resposta4"),
+                    //Answer = node.GetPropertyValue("answer"),
+                    Question = node.GetPropertyValue("question"),
+                    Answer1 = node.GetPropertyValue("answer1"),
+                    Answer2 = node.GetPropertyValue("answer2"),
+                    Answer3 = node.GetPropertyValue("answer3"),
+                    Answer4 = node.GetPropertyValue("answer4"),
                     QuestionId = node.Id
-                };                
+                };
             }
             return questionAnswerModel;
         }
 
         [HttpGet]
-        public string PostQuiz(int questionId, string answer)
+        public bool PostQuiz(int questionId, string answer)
         {
             this.UpdateQuestionToCMS(questionId);
-            return "paco";
+            return this.ValidateAnswerAndUpdateCMS(questionId, answer);
         }
 
         private DynamicNode GetQuestionFromRandomSelection(int nodeId)
@@ -67,6 +67,25 @@ namespace Casament.Controllers
             var questionsAnswered = member.getProperty("questionsAppeared").Value;
             member.getProperty("questionsAppeared").Value = questionsAnswered + "," + questionId;
             member.Save();
+        }
+
+        private bool ValidateAnswerAndUpdateCMS(int questionId, string answer)
+        {
+            var questionNode = new DynamicNode(questionId);
+            if (questionNode.GetPropertyValue("answer") == questionNode.GetPropertyValue(answer))
+            {
+                var member = umbraco.cms.businesslogic.member.Member.GetMemberFromEmail("test@test.com");
+                var valueCMS = member.getProperty("puntuation").Value.ToString();
+                var puntuation = !string.IsNullOrEmpty(valueCMS) ? Int32.Parse(member.getProperty("puntuation").Value.ToString()) : 0;
+                member.getProperty("puntuation").Value = puntuation + 1;
+                member.Save();
+                return true;
+            }
+            else
+            {
+                //error
+                return false;
+            }
         }
     }
 }

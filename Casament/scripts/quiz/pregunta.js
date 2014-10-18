@@ -20,10 +20,6 @@ function ShowInitialQuestion() {
         success: function (data) {
             PaintData(data);
 
-            $("#buttonsSelector").removeClass("hidden");
-
-            var element = $('[data-type=button]');
-            element.remove();
         }
     });
 }
@@ -36,7 +32,11 @@ function SendAnswerSelected(questionId, answer) {
         dataType: "json",
         contentType: 'application/json, charset=utf-8',
         success: function (data) {
-            GetNewQuestion();
+            if (data == false) {
+                alert("Error");
+            } else {
+                GetNewQuestion();
+            }
         }
     });
 }
@@ -65,6 +65,9 @@ function PaintData(data) {
         $('[data-type=answer2]').find("button").text(data.Result.Answer2);
         $('[data-type=answer3]').find("button").text(data.Result.Answer3);
         $('[data-type=answer4]').find("button").text(data.Result.Answer4);
+        $("#buttonsSelector").removeClass("hidden");
+        var element = $('[data-type=button]');
+        element.remove();
     }
 
 }
