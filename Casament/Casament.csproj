@@ -217,6 +217,7 @@
   <ItemGroup>
     <Compile Include="Controllers\QuizController.cs" />
     <Compile Include="Controllers\SignInFormController.cs" />
+    <Compile Include="Controllers\UserImporterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -331,6 +332,7 @@
     <Content Include="css\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap\css\bootstrap.css" />
     <Content Include="css\bootstrap\css\bootstrap.min.css" />
+    <Content Include="css\countdown\countdown.css" />
     <Content Include="css\custom.css" />
     <Content Include="css\dummy.txt" />
     <Content Include="css\font-awesome\css\font-awesome.css" />
@@ -349,6 +351,36 @@
     <Content Include="default.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\countdown\flipper00.png" />
+    <Content Include="images\countdown\flipper01.png" />
+    <Content Include="images\countdown\flipper02.png" />
+    <Content Include="images\countdown\flipper10.png" />
+    <Content Include="images\countdown\flipper11.png" />
+    <Content Include="images\countdown\flipper12.png" />
+    <Content Include="images\countdown\flipper20.png" />
+    <Content Include="images\countdown\flipper21.png" />
+    <Content Include="images\countdown\flipper22.png" />
+    <Content Include="images\countdown\flipper30.png" />
+    <Content Include="images\countdown\flipper31.png" />
+    <Content Include="images\countdown\flipper32.png" />
+    <Content Include="images\countdown\flipper40.png" />
+    <Content Include="images\countdown\flipper41.png" />
+    <Content Include="images\countdown\flipper42.png" />
+    <Content Include="images\countdown\flipper50.png" />
+    <Content Include="images\countdown\flipper51.png" />
+    <Content Include="images\countdown\flipper52.png" />
+    <Content Include="images\countdown\flipper60.png" />
+    <Content Include="images\countdown\flipper61.png" />
+    <Content Include="images\countdown\flipper62.png" />
+    <Content Include="images\countdown\flipper70.png" />
+    <Content Include="images\countdown\flipper71.png" />
+    <Content Include="images\countdown\flipper72.png" />
+    <Content Include="images\countdown\flipper80.png" />
+    <Content Include="images\countdown\flipper81.png" />
+    <Content Include="images\countdown\flipper82.png" />
+    <Content Include="images\countdown\flipper90.png" />
+    <Content Include="images\countdown\flipper91.png" />
+    <Content Include="images\countdown\flipper92.png" />
     <Content Include="images\other_images\bg1.jpg" />
     <Content Include="images\other_images\bg2.jpg" />
     <Content Include="images\other_images\bg3.jpg" />
@@ -417,6 +449,9 @@
     <Content Include="media\dummy.txt" />
     <Content Include="scripts\bootstrap\bootstrap.js" />
     <Content Include="scripts\bootstrap\bootstrap.min.js" />
+    <Content Include="scripts\countdown\countdown_new.js" />
+    <Content Include="scripts\countdown\jquery.countdown.js" />
+    <Content Include="scripts\countdown\jquery.countdown.min.js" />
     <Content Include="scripts\detectmobilebrowser.js" />
     <Content Include="scripts\dummy.txt" />
     <Content Include="scripts\functions.js" />
@@ -616,6 +651,9 @@
   <ItemGroup>
     <Content Include="Views\MacroPartials\Pregunta.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\countdown\.DS_Store" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -632,7 +670,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>18945</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:16071/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

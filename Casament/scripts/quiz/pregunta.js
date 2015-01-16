@@ -56,7 +56,8 @@ function GetNewQuestion() {
 
 function PaintData(data) {
     if (data.State == "false") {
-        alert("Yo have won!");
+        $(".buttonSelector .startQuiz").text("Reinicia el joc");
+        //alert("Yo have won!");
     } else {
         $(".section-title").text(data.Result.Title);
         $(".questionContent").html(data.Result.Question).text();

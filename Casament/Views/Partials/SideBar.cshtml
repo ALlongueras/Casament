@@ -28,6 +28,16 @@
             <li id="menu-item-contact" class="menu-item scroll">@Html.ActionLink("Log out", "MemberUmbLogout", "SignInForm")</li>
                 }
             }
+            <li>
+                <div id="getting-started"></div>
+  <script type="text/javascript">
+    $("#getting-started").countdown("2015/05/30", function(event) {
+      $(this).text(
+        event.strftime('%D days %H:%M:%S')
+      );
+    });
+  </script>
+            </li>
         </ul><!-- #main-menu -->
 
 </section><!-- #left-sidebar -->
