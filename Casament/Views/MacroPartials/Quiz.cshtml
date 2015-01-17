@@ -2,17 +2,19 @@
 @inherits Umbraco.Web.Macros.PartialViewMacroPage
 
 @{
-    string idNode = ViewData.Model.MacroParameters["newModel"].ToString();
-    var node = new DynamicNode(idNode);
+    var nodeId = Model.MacroParameters["nodeId"];
+    var node = new DynamicNode(nodeId);
+    var image = node.GetPropertyValue("background");
+    var imageUrl = image != null ? Umbraco.Media(image).NiceUrl() : string.Empty;
 }
 
-<article id="text" class="section-wrapper clearfix" data-custom-background-img="images/other_images/bg1.jpg">
+<article id="text" class="section-wrapper clearfix" data-custom-background-img="@imageUrl">
     <div class="content-wrapper clearfix">
         <div class="col-sm-10 col-md-9 pull-right">
 
-            <h1 class="section-title">@node.GetPropertyValue("titol")</h1>
+            <h1 class="section-title">@node.GetPropertyValue("title")</h1>
 
-            <h3 class="questionContent">@Html.Raw(node.GetPropertyValue("contingut"))</h3>
+            <h3 class="questionContent">@Html.Raw(node.GetPropertyValue("content"))</h3>
             <div id="buttonsSelector" class="hidden">
                 <div class="input-group" data-type="answer1">
                     <span class="input-group-btn">
@@ -39,7 +41,10 @@
                     @*<label class="form-control">This is the first answer</label>*@
                 </div>
             </div>
-            <p data-type="button" class="buttonSelector"><a href="#" class="btn btn-outline-inverse btn-sm startQuiz">Començar a jugar</a></p>
+            <div data-type="button" class="buttonSelector">
+                <button class="btn btn-outline-inverse btn-sm startQuiz">@node.GetPropertyValue("buttonText")</button>
+                <button class="btn btn-outline-inverse btn-sm restartQuiz hidden">Reinicia el joc</button>
+            </div>
 
         </div>
         <!-- .col-sm-10 -->

@@ -4,7 +4,7 @@
 @{
     var nodeId = Model.MacroParameters["nodeId"];
     var node = new DynamicNode(nodeId);
-    var image = node.GetPropertyValue("imageBackground");
+    var image = node.GetPropertyValue("background");
     var imageUrl = image != null ? Umbraco.Media(image).NiceUrl() : string.Empty;
 }
 <article id="intro" class="section-wrapper clearfix" data-custom-background-img="@imageUrl">
@@ -22,9 +22,12 @@
                          });
 
 </script>
+                <div class="row">
                 <h1>@node.GetPropertyValue("title")</h1>
                 @Html.Raw(node.GetPropertyValue("content"))
-                <p><a href="#text" class="link-scroll btn btn-outline-inverse btn-lg">@node.GetPropertyValue("buttonText")</a></p>
+                    <p><a href="#text" class="link-scroll btn btn-outline-inverse btn-lg">@node.GetPropertyValue("buttonText")</a></p>
+
+                </div>
             </section>
 
         </div><!-- .col-sm-10 -->

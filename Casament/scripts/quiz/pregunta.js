@@ -8,6 +8,9 @@
         var answer = this.parentElement.parentElement.dataset.type;
         SendAnswerSelected(questionId, answer);
     });
+    $(".buttonSelector .restartQuiz").click(function() {
+        RestartQuiz();
+    });
 });
 
 function ShowInitialQuestion() {
@@ -18,8 +21,29 @@ function ShowInitialQuestion() {
         dataType: "json",
         contentType: 'application/json, charset=utf-8',
         success: function (data) {
-            PaintData(data);
+            if (data.state == "true") {
+                PaintData(data);
+            } else {
+                AllAttemptsCompleted();
+            }
+        }
+    });
+}
 
+function RestartQuiz() {
+    $.ajax({
+        url: "http://local.casament.com/Umbraco/Api/Quiz/GetRestartQuiz",
+        type: 'GET',
+        async: true,
+        dataType: "json",
+        contentType: 'application/json, charset=utf-8',
+        success: function (data) {
+            if (data.State == "true") {
+                $(".buttonSelector .restartQuiz").addClass("hidden");
+                ShowInitialQuestion();
+            } else {
+                AllAttemptsCompleted();
+            }
         }
     });
 }
@@ -33,7 +57,10 @@ function SendAnswerSelected(questionId, answer) {
         contentType: 'application/json, charset=utf-8',
         success: function (data) {
             if (data == false) {
-                alert("Error");
+                $(".section-title").text("Ohhh has fallat");
+                $(".questionContent").addClass("hidden");
+                $("#buttonsSelector").addClass("hidden");
+                $(".buttonSelector .restartQuiz").removeClass("hidden");
             } else {
                 GetNewQuestion();
             }
@@ -56,8 +83,8 @@ function GetNewQuestion() {
 
 function PaintData(data) {
     if (data.State == "false") {
-        $(".buttonSelector .startQuiz").text("Reinicia el joc");
-        //alert("Yo have won!");
+        $("#buttonsSelector").addClass("hidden");
+        $(".buttonSelector .restartQuiz").removeClass("hidden");
     } else {
         $(".section-title").text(data.Result.Title);
         $(".questionContent").html(data.Result.Question).text();
@@ -66,9 +93,15 @@ function PaintData(data) {
         $('[data-type=answer2]').find("button").text(data.Result.Answer2);
         $('[data-type=answer3]').find("button").text(data.Result.Answer3);
         $('[data-type=answer4]').find("button").text(data.Result.Answer4);
+        $(".questionContent").removeClass("hidden");
         $("#buttonsSelector").removeClass("hidden");
-        var element = $('[data-type=button]');
-        element.remove();
+        $(".buttonSelector .startQuiz").addClass("hidden");
     }
 
+}
+
+function AllAttemptsCompleted() {
+    $(".section-title").text("Has esgotat tot els intents possibles");
+    $(".questionContent").addClass("hidden");
+    $(".buttonSelector .startQuiz").addClass("hidden");
 }

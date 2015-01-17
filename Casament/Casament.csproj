@@ -333,6 +333,7 @@
     <Content Include="css\bootstrap\css\bootstrap.css" />
     <Content Include="css\bootstrap\css\bootstrap.min.css" />
     <Content Include="css\countdown\countdown.css" />
+    <Content Include="css\countdown\countdownWrapper.css" />
     <Content Include="css\custom.css" />
     <Content Include="css\dummy.txt" />
     <Content Include="css\font-awesome\css\font-awesome.css" />
@@ -653,6 +654,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\countdown\.DS_Store" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MacroPartials\MainSection.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

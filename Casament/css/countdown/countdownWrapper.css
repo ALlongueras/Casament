@@ -1,0 +1,6 @@
+﻿#Stage_jbeeb_3 {
+    float: right;
+}
+#Stage_jbeeb_3 + .row {
+    float: right;
+}
