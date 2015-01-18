@@ -7,7 +7,7 @@
     var image = node.GetPropertyValue("background");
     var imageUrl = image != null ? Umbraco.Media(image).NiceUrl() : string.Empty;
 }
-<article id="intro" class="section-wrapper clearfix" data-custom-background-img="@imageUrl">
+<article id="@node.Id" class="section-wrapper clearfix" data-custom-background-img="@imageUrl">
     <div class="content-wrapper clearfix wow fadeInDown" data-wow-delay="0.3s">
         <div class="col-sm-10 col-md-9 pull-right">
 
@@ -25,7 +25,7 @@
                 <div class="row">
                 <h1>@node.GetPropertyValue("title")</h1>
                 @Html.Raw(node.GetPropertyValue("content"))
-                    <p><a href="#text" class="link-scroll btn btn-outline-inverse btn-lg">@node.GetPropertyValue("buttonText")</a></p>
+                    <p><a href="#@node.AncestorOrSelf("Home").Descendants("Item").First(x=>x.Id != node.Id).Id" class="link-scroll btn btn-outline-inverse btn-lg">@node.GetPropertyValue("buttonText")</a></p>
 
                 </div>
             </section>

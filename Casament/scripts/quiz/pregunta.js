@@ -11,7 +11,24 @@
     $(".buttonSelector .restartQuiz").click(function() {
         RestartQuiz();
     });
+
+    $("#enviarFormulari").click(function() {
+        SendEmailContact();
+    });
 });
+
+function SendEmailContact() {
+    $.ajax({
+        url: "http://local.casament.com/Umbraco/Api/ContactForm/GetConsultForm?name=albert&consulta=bon dia&email=nuriapelegri@gmail.com",
+        type: 'GET',
+        async: true,
+        dataType: "json",
+        contentType: 'application/json, charset=utf-8',
+        success: function () {
+            alert("enviat!!");
+        }
+    });
+}
 
 function ShowInitialQuestion() {
     $.ajax({
@@ -21,7 +38,7 @@ function ShowInitialQuestion() {
         dataType: "json",
         contentType: 'application/json, charset=utf-8',
         success: function (data) {
-            if (data.state == "true") {
+            if (data.State == "true") {
                 PaintData(data);
             } else {
                 AllAttemptsCompleted();

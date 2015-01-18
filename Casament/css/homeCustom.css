@@ -1,1 +1,8 @@
-﻿
+﻿@media screen and (max-device-width: 786px), screen and (max-width: 786px)
+{
+    #Stage_jbeeb_3
+    {
+        margin: auto;
+        float: none !important;
+    }
+}

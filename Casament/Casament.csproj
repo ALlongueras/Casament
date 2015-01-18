@@ -215,12 +215,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ContactFormController.cs" />
     <Compile Include="Controllers\QuizController.cs" />
     <Compile Include="Controllers\SignInFormController.cs" />
     <Compile Include="Controllers\UserImporterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConsultModel.cs" />
     <Compile Include="Models\QuestionAnswerModel.cs" />
     <Compile Include="Models\QuestionModel.cs" />
     <Compile Include="Models\SignInModel.cs" />
@@ -657,6 +659,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\MacroPartials\MainSection.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\ContactForm.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MacroPartials\ContactForm.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

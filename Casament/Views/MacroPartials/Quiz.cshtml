@@ -8,7 +8,7 @@
     var imageUrl = image != null ? Umbraco.Media(image).NiceUrl() : string.Empty;
 }
 
-<article id="text" class="section-wrapper clearfix" data-custom-background-img="@imageUrl">
+<article id="@node.Id" class="section-wrapper clearfix" data-custom-background-img="@imageUrl">
     <div class="content-wrapper clearfix">
         <div class="col-sm-10 col-md-9 pull-right">
 

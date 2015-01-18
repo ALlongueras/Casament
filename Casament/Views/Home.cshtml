@@ -9,6 +9,7 @@
     @Html.Partial("SignInForm", new SignInModel())
     if (User.Identity.IsAuthenticated)
     {
+      @Html.Partial("SideBar")
         @Umbraco.RenderMacro("HomeRender")
 
     }
