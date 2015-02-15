@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using Casament.Models;
-using ICSharpCode.SharpZipLib.Zip;
-using umbraco;
-using umbraco.cms.businesslogic.web;
-using Umbraco.Core.Models.Membership;
-using umbraco.MacroEngines;
-using Umbraco.Web.WebApi;
-
-namespace Casament.Controllers
+﻿namespace Casament.Controllers
 {
-    using umbraco.cms.businesslogic.member;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Http;
+    using Archetype.Models;
+    using Casament.Models;
+    using umbraco;
+    using Umbraco.Core.Models;
+    using umbraco.MacroEngines;
+    using Umbraco.Web;
+    using Umbraco.Web.WebApi;
 
     public class QuizController : UmbracoApiController
     {
         [HttpGet]
-        public QuestionAnswerModel GetQuiz(int nodeId)
+        public QuestionAnswerModel GetQuiz(int nodeId, string userId)
         {
-            var node = GetQuestionFromRandomSelection(nodeId);
+            var node = GetQuestionFromRandomSelection(nodeId, userId);
             var questionAnswerModel = new QuestionAnswerModel();
             if (node == null)
             {
@@ -31,15 +26,17 @@ namespace Casament.Controllers
             else
             {
                 questionAnswerModel.State = "true";
+                var answers = new List<string>();
+                foreach (var answer in Umbraco.TypedContent(node.Id).GetPropertyValue<ArchetypeModel>("answers"))
+                {
+                    answers.Add(answer.GetValue<string>("answerTitle"));
+                }
+
                 questionAnswerModel.Result = new QuestionModel
                 {
-                    Title = node.Name,
-                    //Answer = node.GetPropertyValue("answer"),
+                    Title = node.GetPropertyValue("questionTitle"),
                     Question = node.GetPropertyValue("question"),
-                    Answer1 = node.GetPropertyValue("answer1"),
-                    Answer2 = node.GetPropertyValue("answer2"),
-                    Answer3 = node.GetPropertyValue("answer3"),
-                    Answer4 = node.GetPropertyValue("answer4"),
+                    Answers = answers,
                     QuestionId = node.Id
                 };
             }
@@ -47,19 +44,19 @@ namespace Casament.Controllers
         }
 
         [HttpGet]
-        public QuestionAnswerModel GetRestartQuiz()
+        public QuestionAnswerModel GetRestartQuiz(string userId)
         {
             var questionAnswerModel = new QuestionAnswerModel();
-            var member = Member.GetMemberFromEmail("test@test.com");
-            var attempts = member.getProperty("attempts").Value.ToString();
-            var attemptsPuntuation = !string.IsNullOrEmpty(attempts) ? Int32.Parse(attempts) : 0;
-            member.getProperty("attempts").Value = attemptsPuntuation + 1;
-            if (attemptsPuntuation < 3)
+            var member = ApplicationContext.Services.MemberService.GetById(int.Parse(userId));
+            var attempts = member.Properties.First(x => x.Alias == "attempts").Value;
+            var attemptsPuntuation = attempts != null ? int.Parse(attempts.ToString()) : 1;
+            member.Properties.First(x => x.Alias == "attempts").Value = attemptsPuntuation + 1;
+            if (attemptsPuntuation <= 3)
             {
                 questionAnswerModel.State = "true";
-                member.getProperty("puntuation").Value = 0;
-                member.getProperty("questionsAppeared").Value = string.Empty;
-                member.Save();
+                member.Properties.First(x => x.Alias == "puntuation").Value = 0;
+                member.Properties.First(x => x.Alias == "questionsAppeared").Value = string.Empty;
+                ApplicationContext.Services.MemberService.Save(member);
             }
             else
             {
@@ -69,44 +66,77 @@ namespace Casament.Controllers
         }
 
         [HttpGet]
-        public bool PostQuiz(int questionId, string answer)
+        public bool PostQuiz(int questionId, string answer, string userId)
         {
-            return this.ValidateAnswerAndUpdateCMS(questionId, answer);
+            var member = ApplicationContext.Services.MemberService.GetById(int.Parse(userId));
+            var valueCMS = member.Properties.First(x => x.Alias == "puntuation").Value;
+            var puntuation = valueCMS != null ? int.Parse(valueCMS.ToString()) : 0;
+            var result = this.ValidateAnswerAndUpdateCMS(member, questionId, answer, puntuation);
+            valueCMS = member.Properties.First(x => x.Alias == "puntuation").Value;
+            puntuation = valueCMS != null ? int.Parse(valueCMS.ToString()) : 0;
+            this.UpdateMaxPuntuation(member, puntuation);
+            return result;
         }
 
-        private DynamicNode GetQuestionFromRandomSelection(int nodeId)
+        private DynamicNode GetQuestionFromRandomSelection(int nodeId, string userId)
         {
-            var member = Member.GetMemberFromEmail("test@test.com");
-            var questionsAnswered = member.getProperty("questionsAppeared").Value;
-            var questionsList = questionsAnswered.ToString().Split(',').ToList();
+            var member = ApplicationContext.Services.MemberService.GetById(int.Parse(userId));
+            var attempts = member.Properties.First(x => x.Alias == "attempts").Value;
+            var attemptsPuntuation = attempts != null ? int.Parse(attempts.ToString()) : 1;
+            if (attemptsPuntuation >= 3)
+            {
+                return null;
+            }
+
+            if (attemptsPuntuation == 0)
+            {
+                member.Properties.First(x => x.Alias == "attempts").Value = attemptsPuntuation + 1;
+            }
+
+            var questionsAnswered = member.Properties.First(x => x.Alias == "questionsAppeared").Value;
+            var questionsList = questionsAnswered != null ? questionsAnswered.ToString().Split(',').ToList() : new List<string>();
             var node = new DynamicNode(nodeId);
             var result = node.Descendants().Where(item => !questionsList.Contains(item.Id.ToString())).ToList();
+
             return result.Any() ? result.GetRandom(1).First() : null;
         }
 
-        private void UpdateQuestionToCMS(int questionId, Member member)
+        private void UpdateQuestionToCMS(int questionId, IMember member)
         {
-            var questionsAnswered = member.getProperty("questionsAppeared").Value;
-            member.getProperty("questionsAppeared").Value = questionsAnswered + "," + questionId;
+            var questionsAnswered = member.Properties.First(x => x.Alias == "questionsAppeared").Value;
+            member.Properties.First(x => x.Alias == "questionsAppeared").Value = questionsAnswered + "," + questionId;
         }
 
-        private bool ValidateAnswerAndUpdateCMS(int questionId, string answer)
+        private bool ValidateAnswerAndUpdateCMS(IMember member, int questionId, string answer, int puntuation)
         {
-            var questionNode = new DynamicNode(questionId);
-            if (questionNode.GetPropertyValue("answer") == questionNode.GetPropertyValue(answer))
+            var possibleAnswers = Umbraco.TypedContent(questionId).GetPropertyValue<ArchetypeModel>("answers");
+            var correctAnswer = string.Empty;
+            foreach (var possibleAnswer in possibleAnswers)
             {
-                var member = Member.GetMemberFromEmail("test@test.com");
-                var valueCMS = member.getProperty("puntuation").Value.ToString();
-                var puntuation = !string.IsNullOrEmpty(valueCMS) ? Int32.Parse(valueCMS) : 0;
-                member.getProperty("puntuation").Value = puntuation + 1;
+                if (possibleAnswer.GetValue<bool>("correctAnswer"))
+                {
+                    correctAnswer = possibleAnswer.GetValue<string>("answerTitle");
+                }
+            }
+
+            if (answer == correctAnswer)
+            {
+                member.Properties.First(x => x.Alias == "puntuation").Value = puntuation + 1;
                 this.UpdateQuestionToCMS(questionId, member);
-                member.Save();
+                ApplicationContext.Services.MemberService.Save(member);
                 return true;
             }
-            else
+            return false;
+        }
+
+        private void UpdateMaxPuntuation(IMember member, int puntuation)
+        {
+            var maxValueCMS = member.Properties.First(x => x.Alias == "maxPuntuation").Value;
+            var maxPuntuation = maxValueCMS != null ? int.Parse(maxValueCMS.ToString()) : 0;
+            if (puntuation > maxPuntuation)
             {
-                //error
-                return false;
+                member.Properties.First(x => x.Alias == "maxPuntuation").Value = puntuation;
+                ApplicationContext.Services.MemberService.Save(member);
             }
         }
     }

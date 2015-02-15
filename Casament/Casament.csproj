@@ -42,6 +42,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Archetype, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Archetype.dll</HintPath>
+    </Reference>
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.3.0.0\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
@@ -89,6 +93,10 @@
     </Reference>
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.Net.2.9.4.1\lib\net40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="MemberImporter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\MemberImporter.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data">
       <HintPath>..\packages\UmbracoCms.Core.7.1.6\lib\Microsoft.ApplicationBlocks.Data.dll</HintPath>
@@ -216,6 +224,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ContactFormController.cs" />
+    <Compile Include="Controllers\MemberImporterController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\QuizController.cs" />
     <Compile Include="Controllers\SignInFormController.cs" />
     <Compile Include="Controllers\UserImporterController.cs" />
@@ -240,6 +251,7 @@
     <Content Include="bin\amd64\sqlceme40.dll" />
     <Content Include="bin\amd64\sqlceqp40.dll" />
     <Content Include="bin\amd64\sqlcese40.dll" />
+    <Content Include="bin\Archetype.dll" />
     <Content Include="bin\AutoMapper.dll" />
     <Content Include="bin\AutoMapper.Net4.dll" />
     <Content Include="bin\AutoMapper.xml" />
@@ -269,6 +281,9 @@
     <Content Include="bin\log4net.dll" />
     <Content Include="bin\Lucene.Net.dll" />
     <Content Include="bin\Lucene.Net.xml" />
+    <Content Include="bin\MemberImporter.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="bin\Microsoft.ApplicationBlocks.Data.dll" />
     <Content Include="bin\Microsoft.Web.Helpers.dll" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
@@ -489,7 +504,9 @@
     <Content Include="scripts\wow\animate.css" />
     <Content Include="scripts\wow\wow.min.js" />
     <Content Include="usercontrols\dummy.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -668,6 +685,9 @@
   <ItemGroup>
     <Content Include="Views\MacroPartials\ContactForm.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MacroPartials\InfoGeneral.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -682,15 +702,14 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>18945</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:16071/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://local.casament.com</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

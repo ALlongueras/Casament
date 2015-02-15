@@ -1,0 +1,25 @@
+﻿<div ng-controller="CustomSectionEditController">
+    <umb-panel>
+        <umb-header tabs="content.tabs">
+            <div class="umb-headline-editor-wrapper span12 ng-scope">
+                <h1 class="ng-binding">My custom section {{id}}</h1>
+            </div>
+        </umb-header>
+        <umb-tab-view>
+            <umb-tab id="tab1" rel="svensson">
+                <div class="umb-pane">
+                    This is tab content for tab 1<br/>
+                    <div ng-controller = "UploadFileController">
+                        <input type="file" file-model="myFile"/>
+                        <button ng-click="uploadFile()">upload me</button>
+                    </div>
+                </div>
+            </umb-tab>
+            <umb-tab id="tab2" rel="kalle">
+                <div class="umb-pane">
+                    This is tab content for tab 2
+                </div>
+            </umb-tab>
+        </umb-tab-view>
+    </umb-panel>
+</div>

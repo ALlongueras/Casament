@@ -1,0 +1,57 @@
+﻿@using Archetype.Models
+@using umbraco.MacroEngines
+@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    var nodeId = Model.MacroParameters["nodeId"];
+    var node = new DynamicNode(nodeId);
+    var image = node.GetPropertyValue("background");
+    var imageUrl = image != null ? Umbraco.Media(image).NiceUrl() : string.Empty;
+    var tabs = Umbraco.TypedContent(nodeId).GetPropertyValue<ArchetypeModel>("tabs"); 
+}
+
+<article id="@node.Id" class="section-wrapper clearfix active" data-custom-background-img="@imageUrl">
+    <div class="content-wrapper mid-vertical-positioning clearfix" style="position: static;">
+        <div class="col-sm-10 col-md-9 pull-right">
+            @{
+                var identifier = new List<string>();
+                var count = 0;
+            }
+            <h1 class="section-title">@node.GetPropertyValue("title")</h1>
+            <h2>@Html.Raw(node.GetPropertyValue("content"))</h2>
+            <div class="tabpanel styled-tabs uniform-height" role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist" text-hidden-xs="true">
+                    @{
+                        foreach (var tab in tabs)
+                        {
+                            var currentIdentifier = "identifier" + count;
+                            identifier.Add(currentIdentifier);
+                            var title = tab.GetValue<string>("title");
+                            <li role="presentation" class="@(tabs.First()==tab?"active":string.Empty)">
+                                <a href="#@currentIdentifier" aria-controls="@currentIdentifier" role="tab" data-toggle="tab" aria-expanded="@(tabs.First()==tab?true:false)">
+                                    <i class="icon fa fa-diamond"></i><span>@title</span>
+                                </a>
+                            </li>
+                            count++;
+                        }
+                    }
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    @{
+                        count = 0;
+                        foreach (var tab in tabs)
+                        {
+                            <div role="tabpanel" class="tab-pane fade active in" id="@identifier[count]" style="min-height: 391px;">
+                                @Html.Raw(tab.GetValue<string>("description"))
+                                <a href="" onclick="populate_and_open_modal(event, 'modal-content-4');" class="btn btn-outline-inverse btn-sm">read more</a>
+                            </div>
+                        }
+                    }
+                </div><!-- .tab-content -->
+            </div><!-- .tabpanel -->
+        </div><!-- .col-sm-10 -->
+    </div><!-- .content-wrapper -->
+</article>
+
+

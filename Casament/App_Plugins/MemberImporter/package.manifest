@@ -1,0 +1,14 @@
+{
+	propertyEditors: [
+		{
+			alias: "MemberImporter",
+			name: "Member Importer",
+			editor: {
+				view: "~/App_Plugins/MemberImporter/backoffice/MemberImporterTree/edit.html",
+			},
+		}
+	],
+	javascript: [
+		'~/App_Plugins/MemberImporter/backoffice/MemberImporterTree/memberImporter.controller.js'
+	]
+}

@@ -9,7 +9,7 @@
     if (User.Identity.IsAuthenticated)
     {
         //enviar a la home privada
-        <p>Logged in: @Member.GetCurrentMember().getProperty("nickName").Value</p>
+        <p>Logged in: @Member.GetCurrentMember().LoginName</p>
         <p class="logout">@Html.ActionLink("Log out", "MemberUmbLogout", "SignInForm")</p>
     }
     else

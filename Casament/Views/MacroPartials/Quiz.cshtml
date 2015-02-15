@@ -1,4 +1,6 @@
-﻿@using umbraco.MacroEngines
+﻿@using Archetype.Models
+@using umbraco.MacroEngines
+@using Member = umbraco.cms.businesslogic.member.Member
 @inherits Umbraco.Web.Macros.PartialViewMacroPage
 
 @{
@@ -8,7 +10,7 @@
     var imageUrl = image != null ? Umbraco.Media(image).NiceUrl() : string.Empty;
 }
 
-<article id="@node.Id" class="section-wrapper clearfix" data-custom-background-img="@imageUrl">
+<article id="@node.Id" class="section-wrapper quiz clearfix" data-custom-background-img="@imageUrl" data-user="@Member.GetCurrentMember().Id">
     <div class="content-wrapper clearfix">
         <div class="col-sm-10 col-md-9 pull-right">
 
@@ -16,39 +18,26 @@
 
             <h3 class="questionContent">@Html.Raw(node.GetPropertyValue("content"))</h3>
             <div id="buttonsSelector" class="hidden">
-                <div class="input-group" data-type="answer1">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default col-sm-2" type="button">Resposta 1</button>
-                    </span>
-                    @*<label class="form-control">This is the first answer</label>*@
-                </div>
-                <div class="input-group" data-type="answer2">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default col-sm-2" type="button">Resposta 2</button>
-                    </span>
-                    @*<label class="form-control">This is the first answer</label>*@
-                </div>
-                <div class="input-group" data-type="answer3">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default col-sm-2" type="button">Resposta 3</button>
-                    </span>
-                    @*<label class="form-control">This is the first answer</label>*@
-                </div>
-                <div class="input-group" data-type="answer4">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default col-sm-2" type="button">Resposta 4</button>
-                    </span>
-                    @*<label class="form-control">This is the first answer</label>*@
-                </div>
+                @{
+                    for (var count = 0; count < 5; count++)
+                    {
+                        string identifier = string.Format("answer{0}", count);
+                        <div class="input-group" data-type="@identifier">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default col-sm-2" type="button">Resposta @count</button>
+                            </span>
+                        </div>
+                    }
+                }
             </div>
             <div data-type="button" class="buttonSelector">
                 <button class="btn btn-outline-inverse btn-sm startQuiz">@node.GetPropertyValue("buttonText")</button>
                 <button class="btn btn-outline-inverse btn-sm restartQuiz hidden">Reinicia el joc</button>
             </div>
-
         </div>
         <!-- .col-sm-10 -->
     </div>
     <!-- .content-wrapper -->
 </article>
+
 

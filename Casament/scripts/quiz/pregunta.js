@@ -1,15 +1,18 @@
 ﻿$(document).ready(function () {
     $(".startQuiz").click(function (event) {
         event.preventDefault();
-        ShowInitialQuestion();
+        var userId = $(".quiz").data("user");
+        ShowInitialQuestion(userId);
     });
     $("#buttonsSelector button").click(function () {
         var questionId = $("#buttonsSelector").attr("data-node");
-        var answer = this.parentElement.parentElement.dataset.type;
-        SendAnswerSelected(questionId, answer);
+        var userId = $(".quiz").data("user");
+        var answer = this.textContent;
+        SendAnswerSelected(questionId, answer, userId);
     });
     $(".buttonSelector .restartQuiz").click(function() {
-        RestartQuiz();
+        var userId = $(".quiz").data("user");
+        RestartQuiz(userId);
     });
 
     $("#enviarFormulari").click(function() {
@@ -30,9 +33,9 @@ function SendEmailContact() {
     });
 }
 
-function ShowInitialQuestion() {
+function ShowInitialQuestion(userId) {
     $.ajax({
-        url: "http://local.casament.com/Umbraco/Api/Quiz/GetQuiz?nodeId=1065",
+        url: "http://local.casament.com/Umbraco/Api/Quiz/GetQuiz?nodeId=1089&userId=" + userId,
         type: 'GET',
         async: true,
         dataType: "json",
@@ -47,9 +50,9 @@ function ShowInitialQuestion() {
     });
 }
 
-function RestartQuiz() {
+function RestartQuiz(userId) {
     $.ajax({
-        url: "http://local.casament.com/Umbraco/Api/Quiz/GetRestartQuiz",
+        url: "http://local.casament.com/Umbraco/Api/Quiz/GetRestartQuiz?userId=" + userId,
         type: 'GET',
         async: true,
         dataType: "json",
@@ -57,7 +60,7 @@ function RestartQuiz() {
         success: function (data) {
             if (data.State == "true") {
                 $(".buttonSelector .restartQuiz").addClass("hidden");
-                ShowInitialQuestion();
+                ShowInitialQuestion(userId);
             } else {
                 AllAttemptsCompleted();
             }
@@ -65,9 +68,9 @@ function RestartQuiz() {
     });
 }
 
-function SendAnswerSelected(questionId, answer) {
+function SendAnswerSelected(questionId, answer, userId) {
     $.ajax({
-        url: "http://local.casament.com/Umbraco/Api/Quiz/PostQuiz?questionId=" + questionId + "&answer=" + answer,
+        url: "http://local.casament.com/Umbraco/Api/Quiz/PostQuiz?questionId=" + questionId + "&answer=" + answer + "&userId=" + userId,
         type: 'GET',
         async: true,
         dataType: "json",
@@ -79,15 +82,15 @@ function SendAnswerSelected(questionId, answer) {
                 $("#buttonsSelector").addClass("hidden");
                 $(".buttonSelector .restartQuiz").removeClass("hidden");
             } else {
-                GetNewQuestion();
+                GetNewQuestion(userId);
             }
         }
     });
 }
 
-function GetNewQuestion() {
+function GetNewQuestion(userId) {
     $.ajax({
-        url: "http://local.casament.com/Umbraco/Api/Quiz/GetQuiz?nodeId=1065",
+        url: "http://local.casament.com/Umbraco/Api/Quiz/GetQuiz?nodeId=1089&userId=" + userId,
         type: 'GET',
         async: true,
         dataType: "json",
@@ -106,10 +109,9 @@ function PaintData(data) {
         $(".section-title").text(data.Result.Title);
         $(".questionContent").html(data.Result.Question).text();
         $("#buttonsSelector").attr("data-node", data.Result.QuestionId);
-        $('[data-type=answer1]').find("button").text(data.Result.Answer1);
-        $('[data-type=answer2]').find("button").text(data.Result.Answer2);
-        $('[data-type=answer3]').find("button").text(data.Result.Answer3);
-        $('[data-type=answer4]').find("button").text(data.Result.Answer4);
+        for (var i = 0; i < data.Result.Answers.length; i++) {
+            $('[data-type=answer' + i + ']').find("button").text(data.Result.Answers[i]);
+        }
         $(".questionContent").removeClass("hidden");
         $("#buttonsSelector").removeClass("hidden");
         $(".buttonSelector .startQuiz").addClass("hidden");
