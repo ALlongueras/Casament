@@ -1,4 +1,5 @@
 ﻿@using Archetype.Models
+@using Casament.Controllers
 @using umbraco.MacroEngines
 @inherits Umbraco.Web.Macros.PartialViewMacroPage
 @{
@@ -10,7 +11,7 @@
 }
 
 <article id="@node.Id" class="section-wrapper clearfix active" data-custom-background-img="@imageUrl">
-    <div class="content-wrapper mid-vertical-positioning clearfix" style="position: static;">
+    <div id="infoSection" class="content-wrapper mid-vertical-positioning clearfix" style="position: static;">
         <div class="col-sm-10 col-md-9 pull-right">
             @{
                 var identifier = new List<string>();
@@ -42,10 +43,46 @@
                         count = 0;
                         foreach (var tab in tabs)
                         {
-                            <div role="tabpanel" class="tab-pane fade active in" id="@identifier[count]" style="min-height: 391px;">
+                            <div role="tabpanel" class="tab-pane fade active @(tabs.First()==tab?"in":string.Empty)" id="@identifier[count]" style="min-height: 391px;">
                                 @Html.Raw(tab.GetValue<string>("description"))
-                                <a href="" onclick="populate_and_open_modal(event, 'modal-content-4');" class="btn btn-outline-inverse btn-sm">read more</a>
+                                @*<a href="" onclick="populate_and_open_modal(event, 'modal-content-4');" class="btn btn-outline-inverse btn-sm">read more</a>*@
+                                @{
+                                    var type = tab.GetValue<string>("informationType");
+                                    if (type == "assistencia")
+                                    {
+                                        var assistanceController = new AssistanceController();
+                                        var currentMember = Membership.GetUser().UserName;
+                                        var memberId = ApplicationContext.Current.Services.MemberService.GetByUsername(currentMember).Id;
+                                        var assistencia = assistanceController.GetCurrentAssistance(memberId);
+                                        <div class="col-sm-6 content">
+                                            <ul>
+                                                <li class="center-block">
+                                                    <a class="icon glyphicon glyphicon-ok @(assistencia == 1 ? "green" : "gray")" data-value="1" href="#"></a>
+                                                </li>                                          
+                                                <li>
+                                                    <span>Vull venir!</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-6 content">
+                                            <ul>
+                                                <li class="center-block">
+                                                    <a class="icon glyphicon glyphicon-remove @(assistencia == 0 ? "green" : "gray")" data-value="0" href="#"></a>                                            
+                                                </li>                                          
+                                                <li>
+                                                    <span>Em perdré el festival!</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+ 
+                                    }
+                                    if (type=="localitzacio")
+                                    {
+                                        <div id="map-canvas"></div>
+                                    }
+                                }
                             </div>
+                            count++;
                         }
                     }
                 </div><!-- .tab-content -->
@@ -53,5 +90,40 @@
         </div><!-- .col-sm-10 -->
     </div><!-- .content-wrapper -->
 </article>
+
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+  function initialize() {
+    var mapCanvas = document.getElementById('map-canvas');
+    var mapOptions = {
+        center: new google.maps.LatLng(41.4296716, 0.6639971),
+      zoom: 11,
+      streetViewControl: false,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+    var markerB = new google.maps.Marker({
+        position: new google.maps.LatLng(41.4329683, 0.6502396),
+        map: map,
+        icon: "https://maps.google.com/mapfiles/kml/shapes/schools_maps.png",
+        title: 'Puig Gros'
+    });    var markerA = new google.maps.Marker({
+        position: new google.maps.LatLng(41.4096716, 0.6839971),
+        map: map,
+        icon: "https://maps.google.com/mapfiles/kml/shapes/schools_maps.png",
+        title: 'Poble'
+    });    google.maps.event.addListener(markerB, 'click', function () {
+        map.setZoom(14);
+        map.setCenter(markerB.getPosition());
+        infowindowB.open(map, markerB);
+    });
+    google.maps.event.addListener(markerA, 'click', function () {
+        map.setZoom(14);
+        map.setCenter(markerA.getPosition());
+        infowindowM.open(map, markerA);
+    });
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 
 

@@ -223,6 +223,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AssistanceController.cs" />
     <Compile Include="Controllers\ContactFormController.cs" />
     <Compile Include="Controllers\MemberImporterController.cs">
       <SubType>Code</SubType>
@@ -500,6 +501,7 @@
     <Content Include="scripts\owl-carousel\owl.carousel.min.js" />
     <Content Include="scripts\owl-carousel\owl.theme.css" />
     <Content Include="scripts\owl-carousel\owl.transitions.css" />
+    <Content Include="scripts\quiz\home.js" />
     <Content Include="scripts\quiz\pregunta.js" />
     <Content Include="scripts\wow\animate.css" />
     <Content Include="scripts\wow\wow.min.js" />
