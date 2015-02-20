@@ -44,7 +44,7 @@ function ShowInitialQuestion(userId) {
             if (data.State == "true") {
                 PaintData(data);
             } else {
-                AllAttemptsCompleted();
+                GetPuntuation(userId);
             }
         }
     });
@@ -119,8 +119,22 @@ function PaintData(data) {
 
 }
 
-function AllAttemptsCompleted() {
-    $(".section-title").text("Has esgotat tot els intents possibles");
-    $(".questionContent").addClass("hidden");
+function GetPuntuation(userId) {
+    $.ajax({
+        url: "http://local.casament.com/Umbraco/Api/Quiz/GetPuntuation?userId=" + userId,
+        type: 'GET',
+        async: true,
+        dataType: "json",
+        contentType: 'application/json, charset=utf-8',
+        success: function (data) {
+            AllAttemptsCompleted(data);
+        }
+    });
+}
+
+function AllAttemptsCompleted(data) {
+    $(".quiz .section-title").text("Has esgotat tot els intents possibles");
+    $(".quiz .questionContent").text("La teva puntuació es de: " + data);
+    //$(".questionContent").addClass("hidden");
     $(".buttonSelector .startQuiz").addClass("hidden");
 }

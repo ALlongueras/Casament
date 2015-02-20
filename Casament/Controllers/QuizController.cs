@@ -78,6 +78,14 @@
             return result;
         }
 
+        [HttpGet]
+        public int GetPuntuation(string userId)
+        {
+            var member = ApplicationContext.Services.MemberService.GetById(int.Parse(userId));
+            var valueCMS = member.Properties.First(x => x.Alias == "maxPuntuation").Value;
+            return valueCMS != null ? int.Parse(valueCMS.ToString()) : 0;
+        }
+
         private DynamicNode GetQuestionFromRandomSelection(int nodeId, string userId)
         {
             var member = ApplicationContext.Services.MemberService.GetById(int.Parse(userId));

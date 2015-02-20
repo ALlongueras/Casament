@@ -7,6 +7,17 @@
     }
 }
 
+@media (min-width: 768px){
+    .navbar-form .form-group
+    {
+        margin-bottom: 10px;
+    }
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
 #infoSection ul
 {
     list-style-type: none;

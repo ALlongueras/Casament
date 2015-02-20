@@ -400,6 +400,12 @@
     <Content Include="images\countdown\flipper90.png" />
     <Content Include="images\countdown\flipper91.png" />
     <Content Include="images\countdown\flipper92.png" />
+    <Content Include="images\NA\20131005_182825.jpg" />
+    <Content Include="images\NA\IMG-20130816-WA0005.jpg" />
+    <Content Include="images\NA\logo.png" />
+    <Content Include="images\NA\logo2.png" />
+    <Content Include="images\NA\menorca 2011 115.jpg" />
+    <Content Include="images\NA\portada.jpg" />
     <Content Include="images\other_images\bg1.jpg" />
     <Content Include="images\other_images\bg2.jpg" />
     <Content Include="images\other_images\bg3.jpg" />

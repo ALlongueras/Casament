@@ -4,7 +4,7 @@
 <section id="left-sidebar">
         
         <div class="logo">
-          <a href="#intro" class="link-scroll"><img src="images/other_images/logo.png" alt="Twilli Air"></a>
+          <a href="#intro" class="link-scroll"><img src="../images/NA/logo2.png" alt="Casament A&N"></a>
         </div><!-- .logo -->
 
         <!-- Menu Icon for smaller viewports -->
@@ -13,20 +13,28 @@
         @{
             foreach (var item in Model.Content.Descendants().Where(x => x.DocumentTypeAlias == "Item" || x.DocumentTypeAlias == "InfoGeneral"))
             {
-        <li id="menu-item-text" class="menu-item scroll"><a href="#@item.Id">@item.Name</a></li>
+                var identifier = "menu-item-" + item.Name;
+        <li id="@identifier" class="menu-item scroll"><a href="#@item.Id">@item.Name</a></li>
             }
         }
+        <br/>
+        <br/>
         <br/>
         <br/>
         @{
             if (User.Identity.IsAuthenticated)
             {
                 //enviar a la home privada
-                <li id="menu-item-contact" class="menu-item scroll"><span class="bold">Logged in: @Member.GetCurrentMember().Text</span></li>
-                <li id="menu-item-contact" class="menu-item scroll">@Html.ActionLink("Log out", "MemberUmbLogout", "SignInForm")</li>
+                <li id="menu-item-contact" class="menu-item scroll"><span class="bold">Hola @Member.GetCurrentMember().Text !</span></li>
+                <li id="menu-item-contact" class="menu-item scroll text-center">
+                    <u>
+                        @Html.ActionLink("Tanca la sessió", "MemberUmbLogout", "SignInForm")
+                    </u>
+
+                </li>
             }
         }
-        <li>
+        @*<li>
             <div id="getting-started"></div>
             <script type="text/javascript">
                 $("#getting-started").countdown("2015/05/30", function(event) {
@@ -35,7 +43,7 @@
                     );
                 });
             </script>
-        </li>
+        </li>*@
     </ul><!-- #main-menu -->
 
 </section><!-- #left-sidebar -->
