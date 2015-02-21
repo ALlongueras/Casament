@@ -17,14 +17,12 @@
             <h1 class="section-title">@node.GetPropertyValue("title")</h1>
 
             <h3 class="questionContent">@Html.Raw(node.GetPropertyValue("content"))</h3>
-            <div id="buttonsSelector" class="hidden">
+            <div id="buttonsSelector" class="hidden btn-toolbar" role="toolbar" aria-label="quiz options">
                 @{
                     for (var count = 0; count < 5; count++)
                     {
                         string identifier = string.Format("answer{0}", count);
-                        <div class="input-group" data-type="@identifier">
-                            <span class="input-group-btn">
-                            </span>
+                        <div class="btn-group" data-type="@identifier" role="group" aria-label="group-@count">
                         </div>
                     }
                 }

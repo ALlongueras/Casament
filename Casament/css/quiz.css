@@ -8,7 +8,7 @@
 }
 
 #buttonsSelector {
-    text-align: right;
+    float: right;
 }
 
 #buttonsSelector button {

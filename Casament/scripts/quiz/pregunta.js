@@ -120,12 +120,12 @@ function PaintData(data, userId) {
         $(".quiz .section-title").text(data.Result.Title);
         $(".quiz .questionContent").html(data.Result.Question).text();
         $("#buttonsSelector").attr("data-node", data.Result.QuestionId);
-        var elementToCreate = '<button class="btn btn-default col-sm-2" type="button"></button>';
+        var elementToCreate = '<button class="link-scroll btn btn-outline-inverse btn-lg" type="button"></button>';
         RemoveSelectors();
         for (var i = 0; i < data.Result.Answers.length; i++) {
             var baseElement = $('[data-type=answer' + i + ']');
-            var parentElement = baseElement.find("span");
-            $(parentElement).append(elementToCreate);
+            //var parentElement = baseElement.find("span");
+            $(baseElement).append(elementToCreate);
             baseElement.find("button").text(data.Result.Answers[i]);
         }
         //binding events
