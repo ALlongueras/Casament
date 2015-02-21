@@ -49,7 +49,7 @@
             var questionAnswerModel = new QuestionAnswerModel();
             var member = ApplicationContext.Services.MemberService.GetById(int.Parse(userId));
             var attempts = member.Properties.First(x => x.Alias == "attempts").Value;
-            var attemptsPuntuation = attempts != null ? int.Parse(attempts.ToString()) : 1;
+            var attemptsPuntuation = attempts != null ? int.Parse(attempts.ToString()) : 0;
             member.Properties.First(x => x.Alias == "attempts").Value = attemptsPuntuation + 1;
             if (attemptsPuntuation <= 3)
             {

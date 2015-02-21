@@ -33,11 +33,17 @@ namespace Casament.Controllers
         {
             var currentMember = ApplicationContext.Current.Services.MemberService.GetById(id);
             var assistance = currentMember.Properties.FirstOrDefault(x => x.Alias == "assistance");
-            if (assistance != null)
+            if (assistance == null)
             {
-                return int.Parse(assistance.Value.ToString());
+                return -1;
             }
-            return 0;
+
+            if (assistance.Value == null)
+            {
+                return -1;
+            }
+
+            return int.Parse(assistance.Value.ToString());
         }
 
     }

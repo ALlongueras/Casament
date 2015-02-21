@@ -1,4 +1,7 @@
-﻿$(document).ready(function () {
+﻿var currentHost = window.location.origin;
+var nodeId = $('input[name=quizNode]').val();
+var email = $('input[name=email]').val();
+$(document).ready(function () {
     $(".startQuiz").click(function (event) {
         event.preventDefault();
         var userId = $(".quiz").data("user");
@@ -16,26 +19,32 @@
     });
 
     $("#enviarFormulari").click(function() {
+        event.preventDefault();
         SendEmailContact();
     });
 });
 
 function SendEmailContact() {
+    $(".form-group p").addClass("hidden");
+    $(".form-loader").fadeIn("fast");
+    var consulta = $('textarea[name="message"]').val();
     $.ajax({
-        url: "http://local.casament.com/Umbraco/Api/ContactForm/GetConsultForm?name=albert&consulta=bon dia&email=nuriapelegri@gmail.com",
+        url: currentHost + "/Umbraco/Api/ContactForm/GetConsultForm?consulta=" + consulta + "&email=" + email,
         type: 'GET',
         async: true,
         dataType: "json",
         contentType: 'application/json, charset=utf-8',
         success: function () {
-            alert("enviat!!");
+            $(".form-group p").removeClass("hidden");
+            $(".form-loader").fadeOut("fast");
+            //alert("enviat!!");
         }
     });
 }
 
 function ShowInitialQuestion(userId) {
     $.ajax({
-        url: "http://local.casament.com/Umbraco/Api/Quiz/GetQuiz?nodeId=1089&userId=" + userId,
+        url: currentHost + "/Umbraco/Api/Quiz/GetQuiz?nodeId=" + nodeId +"&userId=" + userId,
         type: 'GET',
         async: true,
         dataType: "json",
@@ -44,7 +53,7 @@ function ShowInitialQuestion(userId) {
             if (data.State == "true") {
                 PaintData(data);
             } else {
-                GetPuntuation(userId);
+                AllAttemptsCompleted(userId);
             }
         }
     });
@@ -52,7 +61,7 @@ function ShowInitialQuestion(userId) {
 
 function RestartQuiz(userId) {
     $.ajax({
-        url: "http://local.casament.com/Umbraco/Api/Quiz/GetRestartQuiz?userId=" + userId,
+        url: currentHost + "/Umbraco/Api/Quiz/GetRestartQuiz?userId=" + userId,
         type: 'GET',
         async: true,
         dataType: "json",
@@ -62,7 +71,7 @@ function RestartQuiz(userId) {
                 $(".buttonSelector .restartQuiz").addClass("hidden");
                 ShowInitialQuestion(userId);
             } else {
-                AllAttemptsCompleted();
+                AllAttemptsCompleted(userId);
             }
         }
     });
@@ -70,15 +79,16 @@ function RestartQuiz(userId) {
 
 function SendAnswerSelected(questionId, answer, userId) {
     $.ajax({
-        url: "http://local.casament.com/Umbraco/Api/Quiz/PostQuiz?questionId=" + questionId + "&answer=" + answer + "&userId=" + userId,
+        url: currentHost + "/Umbraco/Api/Quiz/PostQuiz?questionId=" + questionId + "&answer=" + answer + "&userId=" + userId,
         type: 'GET',
         async: true,
         dataType: "json",
         contentType: 'application/json, charset=utf-8',
         success: function (data) {
             if (data == false) {
-                $(".section-title").text("Ohhh has fallat");
-                $(".questionContent").addClass("hidden");
+                $(".quiz .section-title").text("Ohhh has fallat");
+                GetPuntuation(userId);
+                //$(".quiz .questionContent").addClass("hidden");
                 $("#buttonsSelector").addClass("hidden");
                 $(".buttonSelector .restartQuiz").removeClass("hidden");
             } else {
@@ -90,7 +100,7 @@ function SendAnswerSelected(questionId, answer, userId) {
 
 function GetNewQuestion(userId) {
     $.ajax({
-        url: "http://local.casament.com/Umbraco/Api/Quiz/GetQuiz?nodeId=1089&userId=" + userId,
+        url: currentHost + "/Umbraco/Api/Quiz/GetQuiz?nodeId=" + nodeId + "&userId=" + userId,
         type: 'GET',
         async: true,
         dataType: "json",
@@ -106,13 +116,13 @@ function PaintData(data) {
         $("#buttonsSelector").addClass("hidden");
         $(".buttonSelector .restartQuiz").removeClass("hidden");
     } else {
-        $(".section-title").text(data.Result.Title);
-        $(".questionContent").html(data.Result.Question).text();
+        $(".quiz .section-title").text(data.Result.Title);
+        $(".quiz .questionContent").html(data.Result.Question).text();
         $("#buttonsSelector").attr("data-node", data.Result.QuestionId);
         for (var i = 0; i < data.Result.Answers.length; i++) {
             $('[data-type=answer' + i + ']').find("button").text(data.Result.Answers[i]);
         }
-        $(".questionContent").removeClass("hidden");
+        $(".quiz .questionContent").removeClass("hidden");
         $("#buttonsSelector").removeClass("hidden");
         $(".buttonSelector .startQuiz").addClass("hidden");
     }
@@ -121,20 +131,20 @@ function PaintData(data) {
 
 function GetPuntuation(userId) {
     $.ajax({
-        url: "http://local.casament.com/Umbraco/Api/Quiz/GetPuntuation?userId=" + userId,
+        url: currentHost + "/Umbraco/Api/Quiz/GetPuntuation?userId=" + userId,
         type: 'GET',
         async: true,
         dataType: "json",
         contentType: 'application/json, charset=utf-8',
         success: function (data) {
-            AllAttemptsCompleted(data);
+            $(".quiz .questionContent").text("La teva puntuació es de: " + data);
         }
     });
 }
 
-function AllAttemptsCompleted(data) {
+function AllAttemptsCompleted(userId) {
     $(".quiz .section-title").text("Has esgotat tot els intents possibles");
-    $(".quiz .questionContent").text("La teva puntuació es de: " + data);
+    GetPuntuation(userId);
     //$(".questionContent").addClass("hidden");
     $(".buttonSelector .startQuiz").addClass("hidden");
 }

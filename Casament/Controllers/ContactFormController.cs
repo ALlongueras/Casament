@@ -20,7 +20,7 @@ namespace Casament.Controllers
     public class ContactFormController : UmbracoApiController
     {
         [HttpGet]
-        public void GetConsultForm(string name, string consulta, string email)
+        public void GetConsultForm(string consulta, string email)
         {
             if (ModelState.IsValid)
             {
@@ -34,7 +34,6 @@ namespace Casament.Controllers
 
                     var sb = new StringBuilder();
                     sb.AppendFormat("<p>Message: {0}</p>", consulta);
-                    sb.AppendFormat("<p>Name: {0}</p>", name);
                     sb.AppendFormat("<p>Email from website: {0}</p>", email);
 
                     SmtpClient smtp = new SmtpClient(host, port) { EnableSsl = true };
@@ -44,7 +43,7 @@ namespace Casament.Controllers
 
                     message.From = new MailAddress(email);
                     message.To.Add(new MailAddress(to));
-                    message.Subject = "Consulta " + name;
+                    message.Subject = "Consulta " + email;
                     message.Body = sb.ToString();
                     message.IsBodyHtml = true;
 

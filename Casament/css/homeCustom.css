@@ -38,6 +38,11 @@
     color: grey !important;
 }
 
+#infoSection .red
+{
+    color: red !important;
+}
+
 #map-canvas
 {
     width: 100%;

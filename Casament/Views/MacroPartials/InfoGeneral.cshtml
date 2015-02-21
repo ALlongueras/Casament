@@ -11,7 +11,7 @@
 }
 
 <article id="@node.Id" class="section-wrapper clearfix active" data-custom-background-img="@imageUrl">
-    <div id="infoSection" class="content-wrapper mid-vertical-positioning clearfix" style="position: static;">
+    <div id="infoSection" class="content-wrapper clearfix" style="position: absolute;">
         <div class="col-sm-10 col-md-9 pull-right">
             @{
                 var identifier = new List<string>();
@@ -67,7 +67,7 @@
                                         <div class="col-sm-6 content">
                                             <ul>
                                                 <li class="center-block">
-                                                    <a class="icon glyphicon glyphicon-remove @(assistencia == 0 ? "green" : "gray")" data-value="0" href="#"></a>                                            
+                                                    <a class="icon glyphicon glyphicon-remove @(assistencia == 0 ? "red" : "gray")" data-value="0" href="#"></a>                                            
                                                 </li>                                          
                                                 <li>
                                                     <span>Em perdré el festival!</span>

@@ -922,124 +922,123 @@ function validate_and_submit_forms(form_object)
         });
 
         // -------------- on Submit of form --------------
-        this_form.submit(function(event)
-        {
-            event.preventDefault ? event.preventDefault() : event.returnValue = false; // stop default action (will be handled via AJAX below)
+        //this_form.submit(function(event)
+        //{
+        //    event.preventDefault ? event.preventDefault() : event.returnValue = false; // stop default action (will be handled via AJAX below)
 
-            // show form loader
-            $(this).find(".form-loader").fadeIn("fast");
+        //    // show form loader
+        //    $(this).find(".form-loader").fadeIn("fast");
 
-            var form_action = $(this).attr("action");
-            // if action is not set (URL to mail.php), stop form action
-            if (form_action === undefined && form_action == "") return false;
+        //    var form_action = $(this).attr("action");
+        //    // if action is not set (URL to mail.php), stop form action
+        //    if (form_action === undefined && form_action == "") return false;
 
-            // clear all errors
-            $(this).find(".alert").fadeOut("fast", function(){ $(this).remove(); });
-            $(this).find(".form-general-error-container").fadeOut("fast", function(){ $(this).empty(); });
+        //    // clear all errors
+        //    $(this).find(".form-general-error-container").fadeOut("fast", function(){ $(this).empty(); });
 
-            var errors_found = false;
+        //    var errors_found = false;
 
-            // for each field with validation enabled (with class .validate)
-            $(this).find(".validate-field").each(function()
-            {
-                var validation_message = validate_fields(this_form, $(this));
-                if (validation_message.length > 0)
-                {
-                    // if there are errors (not successfull)
-                    if (validation_message[0]["message"] !== undefined && validation_message[0]["message"] != "" && validation_message[0]["message"] != "success")
-                    {
-                        // create error field
-                        var error_field_html = '<div class="alert">'+validation_message[0]["message"]+'</div>';
-                        $(this).after(error_field_html);
-                        $(this).siblings(".alert").fadeIn("fast");
+        //    // for each field with validation enabled (with class .validate)
+        //    $(this).find(".validate-field").each(function()
+        //    {
+        //        var validation_message = validate_fields(this_form, $(this));
+        //        if (validation_message.length > 0)
+        //        {
+        //            // if there are errors (not successfull)
+        //            if (validation_message[0]["message"] !== undefined && validation_message[0]["message"] != "" && validation_message[0]["message"] != "success")
+        //            {
+        //                // create error field
+        //                var error_field_html = '<div class="alert">'+validation_message[0]["message"]+'</div>';
+        //                $(this).after(error_field_html);
+        //                $(this).siblings(".alert").fadeIn("fast");
 
-                        errors_found = true;
-                    }
-                    // end: if there are errors
-                }               
-            });
-            // end: for each field
+        //                errors_found = true;
+        //            }
+        //            // end: if there are errors
+        //        }               
+        //    });
+        //    // end: for each field
 
-            // if errors were found, stop form from being submitted
-            if (errors_found == true) 
-            {
-                // hide loader
-                $(this).find(".form-loader").fadeOut("fast");
-                return false;
-            }
+        //    // if errors were found, stop form from being submitted
+        //    if (errors_found == true) 
+        //    {
+        //        // hide loader
+        //        //$(this).find(".form-loader").fadeOut("fast");
+        //        return false;
+        //    }
 
-            // submit form
-            $.ajax({
-                type: 'POST',
-                url: form_action,
-                data: $(this).serialize(),
-                dataType: 'html',
-                success: function (data) 
-                {
-                    // if form submission was processed (successfully or not)
+        //    // submit form
+        //    $.ajax({
+        //        type: 'POST',
+        //        url: form_action,
+        //        data: $(this).serialize(),
+        //        dataType: 'html',
+        //        success: function (data) 
+        //        {
+        //            // if form submission was processed (successfully or not)
 
-                    // hide loader
-                    this_form.find(".form-loader").fadeOut("fast");
+        //            // hide loader
+        //            this_form.find(".form-loader").fadeOut("fast");
 
-                    var submission_successful = (data == "success") ? true : false;
-                    var captcha_success = (data == "captcha") ? false : true;
+        //            var submission_successful = (data == "success") ? true : false;
+        //            var captcha_success = (data == "captcha") ? false : true;
 
-                    var message = "";
-                    switch(data) {
-                        case "success":
-                            message = "Form submitted successfully.";
-                            break;
-                        case "captcha":
-                            message = "Incorrect text entered. (Case-sensitive)";
-                            break;
-                        case "incomplete":
-                            message = "Please fill in all required fields.";
-                            break;
-                        case "error":
-                            message = "An error occured. Please try again later.";
-                            break;
-                    }
+        //            var message = "";
+        //            switch(data) {
+        //                case "success":
+        //                    message = "Form submitted successfully.";
+        //                    break;
+        //                case "captcha":
+        //                    message = "Incorrect text entered. (Case-sensitive)";
+        //                    break;
+        //                case "incomplete":
+        //                    message = "Please fill in all required fields.";
+        //                    break;
+        //                case "error":
+        //                    message = "An error occured. Please try again later.";
+        //                    break;
+        //            }
 
-                    // prepare message to show after form processed
-                    var message_field_html = '<div class="alert ';
-                    message_field_html += (submission_successful == true) ? 'success' : 'error';
-                    message_field_html += '">'+message+'</div>';
+        //            // prepare message to show after form processed
+        //            var message_field_html = '<div class="alert ';
+        //            message_field_html += (submission_successful == true) ? 'success' : 'error';
+        //            message_field_html += '">'+message+'</div>';
 
-                    // incorrect captcha
-                    if (!captcha_success) {
-                        this_form.find("#form-captcha").parent(".form-group").append(message_field_html);
-                        this_form.find("#form-captcha").siblings(".alert").fadeIn("fast");
-                    }
-                    // general message
-                    else {
-                        this_form.find(".form-general-error-container").html(message_field_html).fadeIn("fast", function(){
-                            // if submission was successful, hide message after some time
-                            $(this).delay(10000).fadeOut("fast", function(){ $(this).html(""); });
-                        });
-                    }
+        //            // incorrect captcha
+        //            if (!captcha_success) {
+        //                this_form.find("#form-captcha").parent(".form-group").append(message_field_html);
+        //                this_form.find("#form-captcha").siblings(".alert").fadeIn("fast");
+        //            }
+        //            // general message
+        //            else {
+        //                this_form.find(".form-general-error-container").html(message_field_html).fadeIn("fast", function(){
+        //                    // if submission was successful, hide message after some time
+        //                    $(this).delay(10000).fadeOut("fast", function(){ $(this).html(""); });
+        //                });
+        //            }
 
-                    // refresh captcha
-                    this_form.find("#form-captcha-img").replaceWith('<img id="form-captcha-img" src="assets/php/form_captcha/captcha_img.php">');
-                    this_form.find("#form-captcha").val("");
+        //            // refresh captcha
+        //            this_form.find("#form-captcha-img").replaceWith('<img id="form-captcha-img" src="assets/php/form_captcha/captcha_img.php">');
+        //            this_form.find("#form-captcha").val("");
 
-                    // if form submitted successfully, empty fields
-                    if (submission_successful == true) this_form.find(".form-control").val("");
-                },
-                error: function (data) 
-                {
-                    // if form submission wasn't processed
+        //            // if form submitted successfully, empty fields
+        //            if (submission_successful == true) this_form.find(".form-control").val("");
+        //        },
+        //        error: function (data) 
+        //        {
+        //            // if form submission wasn't processed
 
-                    // hide loader
-                    this_form.find(".form-loader").fadeOut("fast");
+        //            // hide loader
+        //            this_form.find(".form-loader").fadeOut("fast");
 
-                    // show error message
-                    var error_field_html = '<div class="alert">An error occured. Please try again later.</div>';
-                    this_form.find(".form-general-error-container").html(error_field_html).fadeIn("fast");
+        //            // show error message
+        //            var error_field_html = '<div class="alert">An error occured. Please try again later.</div>';
+        //            this_form.find(".form-general-error-container").html(error_field_html).fadeIn("fast");
 
-                }
-            }); 
-            // end: submit form           
-        });
+        //        }
+        //    }); 
+        //    // end: submit form           
+        //});
         // -------------- end: on Submit of form --------------
 
     })

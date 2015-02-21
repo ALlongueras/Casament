@@ -5,7 +5,9 @@
     var nodeId = Model.MacroParameters["nodeId"];
     var node = new DynamicNode(nodeId);
     var image = node.GetPropertyValue("background");
-    var imageUrl = image != null ? Umbraco.Media(image).NiceUrl() : string.Empty;    
+    var imageUrl = image != null ? Umbraco.Media(image).NiceUrl() : string.Empty;
+    var member = Membership.GetUser();
+    var emailMember = member != null ? ApplicationContext.Services.MemberService.GetByUsername(member.UserName).Email : string.Empty;
 }
 <article id="@node.Id" class="section-wrapper clearfix active" data-custom-background-img="@imageUrl">
     <div class="content-wrapper clearfix" style="position: static;">
@@ -28,14 +30,15 @@
                         <textarea placeholder="Escriu el vostre missatge" class="form-control validate-field required" name="message"></textarea>
                     </div> 
                     <div class="form-group">
-                        <img src="assets/images/theme_images/loader-form.GIF" class="form-loader">
+                        <p class="hidden">Missatge enviat</p>
+                        <img src="/images/theme_images/loader-form.GIF" class="form-loader">
                         <button type="submit" id="enviarFormulari" class="btn btn-sm btn-outline-inverse">@node.GetPropertyValue("buttonText")</button>
                     </div> 
-                    <div class="form-group form-general-error-container"></div>           
                 </div>
 
             </form>
         </div><!-- end: CONTACT FORM -->
+        <input type="hidden" name="email" value="@emailMember"/>
 
     </div><!-- .content-wrapper -->
 </article>
