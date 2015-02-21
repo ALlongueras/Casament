@@ -37,7 +37,6 @@ function SendEmailContact() {
         success: function () {
             $(".form-group p").removeClass("hidden");
             $(".form-loader").fadeOut("fast");
-            //alert("enviat!!");
         }
     });
 }
@@ -51,7 +50,7 @@ function ShowInitialQuestion(userId) {
         contentType: 'application/json, charset=utf-8',
         success: function (data) {
             if (data.State == "true") {
-                PaintData(data);
+                PaintData(data, userId);
             } else {
                 AllAttemptsCompleted(userId);
             }
@@ -106,27 +105,48 @@ function GetNewQuestion(userId) {
         dataType: "json",
         contentType: 'application/json, charset=utf-8',
         success: function (data) {
-            PaintData(data);
+            PaintData(data, userId);
         }
     });
 }
 
-function PaintData(data) {
+function PaintData(data, userId) {
     if (data.State == "false") {
+        $(".quiz .section-title").text("Felicitats!! Has encertat totes les preguntes!");
+        GetPuntuation(userId);
+        //$(".quiz .questionContent").addClass("hidden");
         $("#buttonsSelector").addClass("hidden");
-        $(".buttonSelector .restartQuiz").removeClass("hidden");
     } else {
         $(".quiz .section-title").text(data.Result.Title);
         $(".quiz .questionContent").html(data.Result.Question).text();
         $("#buttonsSelector").attr("data-node", data.Result.QuestionId);
+        var elementToCreate = '<button class="btn btn-default col-sm-2" type="button"></button>';
+        RemoveSelectors();
         for (var i = 0; i < data.Result.Answers.length; i++) {
-            $('[data-type=answer' + i + ']').find("button").text(data.Result.Answers[i]);
+            var baseElement = $('[data-type=answer' + i + ']');
+            var parentElement = baseElement.find("span");
+            $(parentElement).append(elementToCreate);
+            baseElement.find("button").text(data.Result.Answers[i]);
         }
+        //binding events
+        $("#buttonsSelector button").click(function () {
+            var questionId = $("#buttonsSelector").attr("data-node");
+            var userId = $(".quiz").data("user");
+            var answer = this.textContent;
+            SendAnswerSelected(questionId, answer, userId);
+        });
         $(".quiz .questionContent").removeClass("hidden");
         $("#buttonsSelector").removeClass("hidden");
         $(".buttonSelector .startQuiz").addClass("hidden");
     }
+}
 
+function RemoveSelectors() {
+    for (var i = 0; i < 5; i++) {
+        var baseElement = $('[data-type=answer' + i + ']');
+        var childElement = baseElement.find("button");
+        $(childElement).remove();
+    }
 }
 
 function GetPuntuation(userId) {

@@ -6,6 +6,10 @@ $(document).ready(function () {
         var action = $(this).data("value");
         UpdateAssistance(this, userId, action);
     });
+
+    $("#main-menu .menu-item a").click(function() {
+        toggle_main_menu();
+    });
 });
 
 function UpdateAssistance(element, userId, action) {
