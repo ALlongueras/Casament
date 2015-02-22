@@ -14,3 +14,7 @@
 #buttonsSelector button {
     float: right;
 }
+
+.btn-group {
+    margin-bottom: 5px;
+}

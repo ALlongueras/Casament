@@ -10,7 +10,7 @@
     var tabs = Umbraco.TypedContent(nodeId).GetPropertyValue<ArchetypeModel>("tabs"); 
 }
 
-<article id="@node.Id" class="section-wrapper clearfix active" data-custom-background-img="@imageUrl">
+<article id="@node.Id" class="section-wrapper clearfix" data-custom-background-img="@imageUrl">
     <div id="infoSection" class="content-wrapper clearfix" style="position: absolute;">
         <div class="col-sm-10 col-md-9 pull-right">
             @{
@@ -43,7 +43,7 @@
                         count = 0;
                         foreach (var tab in tabs)
                         {
-                            <div role="tabpanel" class="tab-pane fade active @(tabs.First()==tab?"in":string.Empty)" id="@identifier[count]" style="min-height: 391px;">
+                            <div role="tabpanel" class="tab-pane fade @(tabs.First()==tab?" active in":string.Empty)" id="@identifier[count]" style="min-height: 391px;">
                                 @Html.Raw(tab.GetValue<string>("description"))
                                 @*<a href="" onclick="populate_and_open_modal(event, 'modal-content-4');" class="btn btn-outline-inverse btn-sm">read more</a>*@
                                 @{
