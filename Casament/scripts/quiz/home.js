@@ -21,14 +21,21 @@ function UpdateAssistance(element, userId, action) {
         contentType: 'application/json, charset=utf-8',
         success: function (data) {
             if (data == true) {
+                var elements = $("#infoSection .content");
+                for (var i = 0; i < elements.length; i++) {
+                    $(elements[i]).find("h4").addClass("hidden");
+                }
                 $("#infoSection .content .green").removeClass("green");
+                //$("#infoSection .content .green").parent().parent().find("span").addClass("hidden");
                 $("#infoSection .content .gray").removeClass("gray");
                 $("#infoSection .content .red").removeClass("red");
+                //$("#infoSection .content .red").parent().parent().find("span").addClass("hidden");
                 if (action == 1) {
                     $(element).addClass("green");
                 } else {
                     $(element).addClass("red");
                 }
+                $(element).parent().parent().find("h4").removeClass("hidden");
             }
         }
     });
