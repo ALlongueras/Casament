@@ -91,39 +91,45 @@
     </div><!-- .content-wrapper -->
 </article>
 
-<script src="https://maps.googleapis.com/maps/api/js"></script>
 <script>
   function initialize() {
     var mapCanvas = document.getElementById('map-canvas');
     var mapOptions = {
         center: new google.maps.LatLng(41.4296716, 0.6639971),
-      zoom: 11,
+      zoom: 10,
       streetViewControl: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     var map = new google.maps.Map(mapCanvas, mapOptions);
+     // map.checkResize();
     var markerB = new google.maps.Marker({
         position: new google.maps.LatLng(41.4329683, 0.6502396),
         map: map,
-        icon: "https://maps.google.com/mapfiles/kml/shapes/schools_maps.png",
-        title: 'Puig Gros'
+        icon: "/images/other_images/garbinada.png",
+        title: 'Hotel La Garbinada'
     });    var markerA = new google.maps.Marker({
         position: new google.maps.LatLng(41.4096716, 0.6839971),
         map: map,
-        icon: "https://maps.google.com/mapfiles/kml/shapes/schools_maps.png",
-        title: 'Poble'
+        icon: "/images/other_images/carpa.png",
+        title: 'Lloc del casament'
     });    google.maps.event.addListener(markerB, 'click', function () {
-        map.setZoom(14);
+        map.setZoom(12);
         map.setCenter(markerB.getPosition());
         infowindowB.open(map, markerB);
     });
     google.maps.event.addListener(markerA, 'click', function () {
-        map.setZoom(14);
+        map.setZoom(12);
         map.setCenter(markerA.getPosition());
         infowindowM.open(map, markerA);
-    });
+    });    //$(window).resize(function () {
+        // (the 'map' here is the result of the created 'var map = ...' above)
+        google.maps.event.trigger(map, "resize");
+    //});
   }
-  google.maps.event.addDomListener(window, 'load', initialize);
+
+  $(document).ready(function() {
+      google.maps.event.addDomListener(window, 'load', initialize);
+  });
 </script>
 
 

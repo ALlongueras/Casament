@@ -1,0 +1,166 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+}
+
+@{
+                    var currentMember = Membership.GetUser() != null ? Membership.GetUser().UserName : null;
+                    var member = ApplicationContext.Current.Services.MemberService.GetByUsername(currentMember);
+}
+
+<!DOCTYPE html>
+<html class="skrollr skrollr-desktop" lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <title>Albert & Núria | La teva invitació</title>
+        <link rel="icon" type="image/png" href="/images/NA/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <link href="/invitacio/css/css_002.css" rel="stylesheet" type="text/css">
+        <link href="/invitacio/css/css.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="/invitacio/css/reset.css">
+        <link rel="stylesheet" href="/invitacio/css/style.css">
+    </head>
+	
+    <body>
+        <div style="left: 50%; top: 425px; opacity: 1;" class="elements skrollable skrollable-between" data-start="left: 50%; top: 425px; opacity: 1" data-900-start="left: 50%; top: 425px; opacity: 1" data-1000-start="left: 50%; top: 425px; opacity: 0" data-1199-start="left: 50%; top: 425px; opacity: 0" data-1200-start="left: 50%; top: 425px; opacity: 1" data-1920-start="left: 50%; top: 425px; opacity: 1" data-2000-start="left: 50%; top: 425px; opacity: 0" data-2200-start="left: 50%; top: 425px; opacity: 1" data-2950-start="left: 50%; top: 425px; opacity: 1" data-3000-start="left: 50%; top: 425px; opacity: 0"></div>
+
+        <div id="skrollr-body" class="skrollable skrollable-between" data-start="opacity: 1;" data-3800-start="opacity: 1;" data-6500-start="opacity: 1;">
+            <div style="right: -15%; bottom: -50%; opacity:0;" class="elements nuria1 skrollable skrollable-between" data-start="right: -15%; bottom: -50%; opacity: 0.5;" data-1000-start="right: 8%; bottom: 10%; opacity: 1;" data-1200-start="right: -12%; bottom: 10%; opacity: 0.7;" data-2000-start="right: -100%; bottom: 10%; opacity: 0;"></div>
+			
+            <div style="left: 14.8%; bottom: -50%; opacity: 0;" class="elements albert1 skrollable skrollable-between" data-start="left: 14.8%; bottom: -50%; opacity: 0.5;" data-1000-start="left: 45%; bottom: 10%; opacity: 1;" data-1200-start="left: 55%; bottom: 10%; opacity: .7;" data-2000-start="left: 100%; bottom: 10%; opacity: 0;"></div>
+			
+            <div style="right: 0%; top: -100%; opacity: 0;" class="elements blackboard skrollable skrollable-between" data-start="right: 0%; top: -40%; opacity: 0;" data-800-start="right: 0%; top: -20%; opacity: 1;" data-1000-start="right: 0%; top: -5%; opacity: 1;" data-1200-start="right: 0%; top: 10%; opacity: .5" data-1800-start="right: 0%; top: 20%; opacity: 0;"></div>
+			
+			
+            <div style="left: -120%; top: 2%; opacity: 0;" class="elements lluna skrollable skrollable-between" data-start="left: -120%; opacity: 0;" data-1800-start="left: -10%; opacity: 0.1;" data-2000-start="left: 2%; opacity: 1;" data-2800-start="left: 130%; opacity: 0;"></div>
+			
+            <div style="left: 35%; bottom: -120%; opacity: 0;" class="elements parella skrollable skrollable-between" data-start="left: 35%; bottom: -120%; opacity: 0;" data-1700-start="left: 35%; bottom: -5%; opacity: 0.2;" data-2000-start="left: 35%; bottom: 10%; opacity: 1;" data-2800-start="left: -50%; bottom: 10%; opacity: 0;"></div>
+			
+            <div style="bottom: 0%; opacity: 0;" class="elements fons skrollable skrollable-between" data-1700-start="opacity: 0;" data-2000-start="opacity: 1;" data-2800-start="opacity: 0;"></div>
+			
+			
+            <div style="right: -70%; top: 24%; opacity: 0;" class="elements avio skrollable skrollable-between" data-2700-start="right: -70%;" data-2800-start="right: 20%; opacity: 0.5;" data-3000-start="right: 50%; opacity: 1;" data-3800-start="right: 180%; opacity: 0;"></div>
+			
+            <div style="left: -50%; top: 2%; opacity: 0;" class="elements sol skrollable skrollable-between" data-2800-start="left: -50%; opacity: 0.5;" data-3000-start="left: 5%; opacity: 1;" data-4000-start="left: 5%; opacity: 0;"></div>
+			
+            <div style="right: -40%; bottom: 0%; opacity: 0;" class="elements nuria2 skrollable skrollable-between" data-2800-start="right: -40%; opacity: 0.5;" data-3000-start="right: 30%; opacity: 1;" data-4000-start="right: 30%; opacity: 1;"></div>
+			
+            <div style="left: -40%; bottom: -1%; opacity: 0;" class="elements albert2 skrollable skrollable-between" data-2800-start="left: -40%; opacity: 0.5;" data-3000-start="left: 40%; opacity: 1;" data-4000-start="left: 40%; opacity: 1;"></div>
+			
+            <div style="bottom: 0%; opacity: 0;" class="elements camp skrollable skrollable-between" data-2800-start="opacity: 0;" data-3000-start="opacity: 1;" data-4000-start="opacity: 0;"></div>
+        </div>
+		
+        <header>
+            <h1>Albert & Núria - La teva invitació<span id="toti"></span></h1>
+            <nav>
+                <ul>
+                    <li class="step-1"><a href="#m-box--presentation">Hello</a></li>
+                    <li class="step-2"><a href="#m-box--front-end">Universitat</a></li>
+                    <li class="step-3"><a href="#m-box--webdesigner">Barcelona</a></li>
+                    <li class="step-4"><a href="#m-box--about">Lleida</a></li>
+                    <li class="step-5"><a href="#m-box--finale2">Invitació</a></li>
+                </ul>
+            </nav>
+        </header>
+		
+        <section id="m-box--presentation">
+            <article class="one">
+                <p><strong>Albert & Núria</strong></p>
+                <p>Aquesta és la historia d'una parella que fa poc menys d'un any va decidir donar un gir a les seves vides. </p>
+                <h2>T'animes a descobrir la seva historia?</h2>
+                <p class="small">(Ves llegint la pàgina ajudan-te del ratolí)</p>
+            </article>
+        </section>
+		
+        <section id="m-box--front-end">
+            <article>
+                <p>A LA UNIVERSITAT</p>
+				
+                <p>Tot va comença en un setembre de 2005, a la Universitat de Telecomunicacions. </p>
+                <p>L'Albert i la Nuria es coneixen dins d'un laboratori de programació. Poc atrets per les assignatures que impartien (i mira que 
+                    costa d'entendre, perquè amb la bona pinta que tenien....) decideixen buscar una alternativa i els dos comencen a fer un equip per tirar-les
+                    endavant conjuntament.</p>
+                     
+                
+            </article>
+        </section>
+		
+        <section id="m-box--webdesigner">
+            <article>
+                <p>BARCELONA</p>
+				
+                <p>En un mar de vides molt independents però sempre tenin present un a l'altre, arriba un dels moments que senta una de les bases més 
+                    importants: <span class="bold">la convivència.</span> </p>
+                <p>Després de 5 anys de relació decideixen anar a viure junts a Barcelona on passaran 4 anys més (al loro que es diuen ràpid, però costen), 
+                    amb alegries i enganxades, però sempre amb la il·lusió per endavant de fer crèixer i enfortir la relació.</p>
+                   <p> Però l'Albert i la Nuria eren dels que no es rendien i sempre buscaven nous projectes. Així que van decidir...</p>
+            </article>
+        </section>
+		
+        <section id="m-box--about">
+            <article class="gris">
+                <p>QUE ES CASAVEN!</p>
+				
+                <p>L'albert des dels inicis n'havia tingut ganes, i la Núria podiem dir, en un principi, que era més escèptica (almenys de cara enfora). 
+                    Malgrat això, un cop va arribar la proposta, l'escepticisme es va anar convertint amb il·lusió, que a dia d'avui, ja us la podeu imaginar.</p>
+                <p>Potser el format no era el que estava més clar, però sí el concepte, i és que volien que fos un casament amb les persones més properes,
+                    aquelles persones que sempre haguessin estat al seu costat durant i cada una de les diferents etapes de la seva vida.</p>
+                <p>És per aquesta raó que...</p>
+                
+            </article>
+        </section>
+		
+        <section id="m-box--finale">
+            <article>
+                <p>ET VOLEM CONVIDAR AL NOSTRE CASAMENT!</p>
+				
+                <p>@member.Name, ens agradaria molt que assistissis a del nostre casament. </p>
+				
+                <a class="btn" href="/">Anar a la web</a>
+            </article>			
+            <span id="m-box--finale2"></span>
+        </section>
+		
+        <section id="m-box--mobile">
+            <article class="one">
+                <p><strong>Albert & Núria</strong></p>
+                @{
+                    member.SetValue("notFirstTime", true);
+                    ApplicationContext.Services.MemberService.Save(member);
+                    var browser = Request.Browser;
+                    var brand = browser.MobileDeviceManufacturer != "Unknown" ? browser.MobileDeviceManufacturer : string.Empty;
+                    var type = browser.MobileDeviceModel;
+                    if (!browser.IsMobileDevice)
+                    {
+                        member.SetValue("invitation", true);
+                        ApplicationContext.Services.MemberService.Save(member);
+                    }
+                    switch (brand)
+                    {
+                        case "Apple":
+                            <p>Apple és una marca molt molonguis, però el que t'anem a mostrar és tant potent que ni tant sols el teu @type pot 
+                                mostrar una cosa tant maca com la que estàs a punt de veure. Ai Steve Jobs...
+                                Obra sisplau la presentació des d'un ordinador!</p>
+                            break;
+                        default:
+                            <p>El teu mòbil no pot mostrar una cosa tant maca com la que estàs a punt de veure. Obra sisplau la presentació des 
+                                d'un ordinador!</p>
+                            break;
+                    }
+                }
+                <a class="btn text-center" href="/">Anar a la web</a>
+            </article>
+        </section>
+		
+        <script src="/invitacio/js/ga.js" async="" type="text/javascript"></script>
+        <script type="text/javascript" src="/invitacio/js/jquery_003.js"></script>
+        <script type="text/javascript" src="/invitacio/js/skrollr.js"></script>
+        <script type="text/javascript" src="/invitacio/js/jquery.js"></script>
+        <script type="text/javascript" src="/invitacio/js/jquery_002.js"></script>
+        <script type="text/javascript" src="/invitacio/js/mousetrap.js"></script>
+        <script type="text/javascript" src="/invitacio/js/all.js"></script>
+    </body>
+</html>
+

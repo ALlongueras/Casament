@@ -7,10 +7,20 @@
 }
 @{
     @Html.Partial("SignInForm", new SignInModel())
+
+
     if (User.Identity.IsAuthenticated)
     {
-      @Html.Partial("SideBar")
-        @Umbraco.RenderMacro("HomeRender")
-
+        var currentMember = Membership.GetUser() != null ? Membership.GetUser().UserName : null;
+        var member = ApplicationContext.Current.Services.MemberService.GetByUsername(currentMember);
+        if (member.GetValue<bool>("invitation") || (member.GetValue<bool>("notFirstTime") && Request.Browser.IsMobileDevice))
+        {
+            @Html.Partial("SideBar")
+            @Umbraco.RenderMacro("HomeRender")
+        }
+        else
+        {
+            Response.Redirect("/invitacio");
+        }
     }
 }
