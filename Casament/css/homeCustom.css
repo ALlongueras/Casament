@@ -64,3 +64,8 @@ p {
     height: 280px;
     background-color: #CCC;
 }
+
+p.errorLoginForm {
+  padding-top: 10px;
+}
+

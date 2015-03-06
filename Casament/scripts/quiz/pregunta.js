@@ -157,7 +157,7 @@ function GetPuntuation(userId) {
         dataType: "json",
         contentType: 'application/json, charset=utf-8',
         success: function (data) {
-            $(".quiz .questionContent").text("La teva puntuació es de: " + data);
+            $(".quiz .questionContent").text("La teva puntuació màxima és de: " + data);
         }
     });
 }

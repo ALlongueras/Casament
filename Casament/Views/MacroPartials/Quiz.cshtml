@@ -16,7 +16,7 @@
 
             <h1 class="section-title">@node.GetPropertyValue("title")</h1>
 
-            <h3 class="questionContent">@Html.Raw(node.GetPropertyValue("content"))</h3>
+            <div class="questionContent">@Html.Raw(node.GetPropertyValue("content"))</div>
             <div id="buttonsSelector" class="hidden btn-toolbar" role="toolbar" aria-label="quiz options">
                 @{
                     for (var count = 0; count < 5; count++)

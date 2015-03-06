@@ -17,9 +17,9 @@
                 @Html.TextBox("Password", Model.Password, new {@class = "form-control", @placeholder = "Contrasenya", @type = "password"})
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-default" />
+                <input type="submit" class="btn btn-outline-inverse" />
             </div>
         }
-        <p>@TempData["Status"]</p>
+        <p class="errorLoginForm">@TempData["Status"]</p>
     }
 }

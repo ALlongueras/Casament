@@ -56,7 +56,7 @@ namespace Casament.Controllers
                 return RedirectToCurrentUmbracoPage();
             }
             TempData["SignInSuccess"] = false;
-            TempData["Status"] = "Invalid username or password";
+            TempData["Status"] = "Usuari o contrasenya invàlids";
             return RedirectToCurrentUmbracoPage();
         }
 

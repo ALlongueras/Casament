@@ -99,30 +99,11 @@ nav ul
     margin-left: -220px !important;
 }
 
-.step-1 a:hover
-{
-    background: #f11300;
-}
-
-.step-2 a:hover
-{
-    background: #177f67;
-}
-
-.step-3 a:hover
-{
-    background: #484673;
-}
-
-.step-4 a:hover
-{
-    background: #abdae5;
-}
-
-.step-5 a:hover
-{
-    background: #e8ce40;
-}
+.step-1 a:hover {background: #f11300 !important;}
+.step-2 a:hover {background: #177f67 !important;}
+.step-3 a:hover {background: #484673 !important;}
+.step-4 a:hover {background: #abdae5 !important;}
+.step-5 a:hover {background: #e8ce40 !important;}
 /* -------------------- */
 
 
@@ -655,5 +636,10 @@ article span.italic {
 
 article span.bold {
     font-weight: bold;
+}
+
+#m-box--mobile h2 {
+  font-size: x-large;
+  font-weight: 700;
 }
 /* CUSTOM ALBERT */
