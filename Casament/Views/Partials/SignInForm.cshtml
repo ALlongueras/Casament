@@ -10,14 +10,20 @@
         {
             <div class="input-group">
                 <span class="input-group-addon inputsWidth">Usuari</span>
+                @{
+                    Model.Email = Request.QueryString["usuari"];
+                }
                 @Html.TextBox("Email", Model.Email, new {@class = "form-control", @placeholder = "Usuari"})
             </div>
             <div class="input-group">
                 <span class="input-group-addon inputsWidth">Contrasenya</span>
+                @{
+                    Model.Password = Request.QueryString["contrasenya"];
+                }
                 @Html.TextBox("Password", Model.Password, new {@class = "form-control", @placeholder = "Contrasenya", @type = "password"})
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-outline-inverse" />
+                <input type="submit" class="btn btn-outline-inverse" value="Accedeix a la web!" />
             </div>
         }
         <p class="errorLoginForm">@TempData["Status"]</p>
