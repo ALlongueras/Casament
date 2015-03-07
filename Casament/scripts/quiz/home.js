@@ -10,6 +10,14 @@ $(document).ready(function () {
     $("#main-menu .menu-item a").click(function() {
         toggle_main_menu();
     });
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr("href");
+        if ((target == '#identifier1')) {
+            initialize();
+            //google.maps.event.addDomListener(window, 'load', initialize);
+        } else {
+        }
+    });
 });
 
 function UpdateAssistance(element, userId, action) {
